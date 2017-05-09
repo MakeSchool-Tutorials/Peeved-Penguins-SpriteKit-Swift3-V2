@@ -3,212 +3,328 @@ title: Creating your first level
 slug: level-design
 ---
 
-Launching penguins is fun.  However, colliding with seals and ice blocks is a game!
+Launching penguins is fun. However, colliding with seals and ice blocks is a game!
 Time to design the first level.
 
-#Level loading mechanism
+# Level loading mechanism
 
-Now let's solve our first little puzzle. Problem: You want to be able to have an unlimited amount of levels in your game. Therefore you don't want the game mechanics (shooting, collision detection, etc.) to be part of the levels itself.  Otherwise you would be in big trouble if you wanted to change them -- you would need to apply the changes to every level. Which is possible just not very sensible :]
+You want to be able to create any number of different levels without having to create
+duplicate code for each level. A SKScene can be can be loaded with any scene (.sks) 
+file. So you can create mulitple .sks files and load any of them from the same SkScene 
+file *GameScene.swift* for example. 
 
-This means your are not going to add the information about a level directly to your *GameScene.sks*. A better solution is to define an area in the *GameScene.sks* that is level specific and load the level data into that area.
+*GameScene.swift* contains the game logic that runs the game. This file contains the 
+definition for a class named `GameScene`, which sublcasses `SKScene`. An `SKScene` can 
+be initialized with an .sks file via the init(fileNamed:) initializer. 
 
-##Add a level node
+Our strategy will be to create an .sks file for each level of the game. This will allow 
+you to create each scene (.sks file) in the visual editor. You will load each .sks file 
+with the same `GameScene.swift`. 
 
-> [action]
-> Drag an *Empty Node* onto your stage and set *Position* to `(468,50)` and set *Name* to `levelNode`.
->
-> ![Add level node](../Tutorial-Images/xcode_spritekit_add_level_node.png)
+*GameScene.swift* will keep the same name. For organization let's rename the game levels 
+as "Level_#.sks" where # will be the level number. For example:
 
-This node will be the container for the levels you will be loading later on. The actual loading mechanism will happen in code, you will we need to create a code connection to make the **levelNode** accessible from the *GameScene* class.
+- Level_1.sks
+- Level_2.sks
+- Level_3.sks
+- etc. 
 
-You should be quite familiar with this process by now.
-
-> [action]
-> Create a code connection for the *levelNode*
->
-
-#Designing a level
-
-> [action]
-> In *Project Navigator* create a *New Group* called **"Levels"**. Inside that group create a new *SpriteKit Scene* file, save it as `Level1.sks`
-> Set *Size* to `(490,275)`
->
-
-Time to design your very first level!, drag in any of the **ice block png** and your *Seal* onto stage and create :]
-
-> [info]
-> Design tip: make sure you put something close to the left edge, that way the player will be able to see a hint of the level.
-
-Here is one I made earlier:
-
-![Level 1 Preview](../Tutorial-Images/xcode_spritekit_level_1_preview.png)
-
-#Level loading code
-
-Now you are going to add some simple level loading code.
+# Level_1
 
 > [action]
-> Open *GameScene.sks*
-> If you had any issue creating the `levelNode` code connection, here is a recap:
->
-> Add this property to your class:
->
-```
-/* Level loader holder */
-var levelNode: SKNode!
-```
->
-> Add the following to the `didMoveToView(...)` method:
->
-```
-/* Set reference to the level loader node */
-levelNode = childNodeWithName("//levelNode")
-```
+> Rename *GameScene.sks* to *Level_1.sks*
 >
 
-<!-- -->
+You will use this file as the template for all of your other levels. You will set this 
+level up and tets with it. Later you can duplicate this file to easily make new levels. 
 
-> To load your level scene into the *GameScene*, add the following to the end of `didMoveToView(...)`:
+# Designing a level
+
+The level is made from the default elements: ground, catapult, bear, and level specific 
+elements: Ice Blocks, and Seals. You'll make the your first level by adding Ice Blocks
+and Seals. 
+
+The Ice Blocks and Seals need to be Physics objects you'll be setting those options. 
+After creating the first Ice Block or Seal you can copy it to create another with the 
+same settings.
+
+> [action] 
+> Design your own level by dragging Ice Blocks and Seals into the scene. 
+> 
+> For Seals, choose Physics Body: "Bounding Circle", Category Mask: 2, Contact Mask: 1.
+> 
+> ![Ice Blocks](../Tutorial-Images/p7-04-seal.png)
 >
-```
-/* Load Level 1 */
-let newLevel = SKReferenceNode(fileNamed: "Level1")
-levelNode.addChild(newLevel)
-```
+> For Ice Blocks, choose Physics Body: "Bounding Rectangle". Leave the other options at 
+> the default values. 
 >
+> Be sure to place some blocks inside the frame on the right. The camera doesn't move yet 
+> so anything outside the frame will not be visible, for now. 
+>
+> ![Ice Blocks](../Tutorial-Images/p7-05-ice-block.png)
+> 
 
-This will load the *Level1.sks* scene and add it as a reference node to the levelNode.
+Testing at this point will produce no results! Fear not and read on...
 
-Run your game... You should see a hint of your level if you put an object near the left edge of *Level1*.
+# Level loading code
 
-![Level 1 Screenshot](../Tutorial-Images/screenshot_loadlevel.png)
-
-##Hit the ice
-
-Try and hit the ice blocks...
-
-Oh no, you can't as the ice blocks don't have physics bodies.  SpriteKit let's work on multiple nodes which will make this task even easier.
+Now you are going to add some simple level loading code. Previously we were loading
+'GameScene.sks'. You've renamed that file to 'Level_1.sks'. You need to set up 
+`GameScene.swift` to load the new scene. You will set it up to load any file named:
+'Level_#' where # could be any number.
 
 > [action]
-> Open *Level1.sks*, hold *Shift* and *Drag* a selection box across all of ice blocks.
->
-> Set *Body Type* to `Bounding rectangle`, all the default values are fine.
-
-Run your game, woo hoo you should be able to knock over the ice blocks!
-
-> [info]
-> Tip: If you noticed in my example level design, I added a back wall to my level and set these ice blocks to be *Static* by `unchecking` the *Dynamic* property. This way the penguin will hit the static ice blocks, blocking the penguin from flying out of the game world.
-
-#Scrolling the scene
-
-Now that you can shoot penguins, let's improve the experience by tracking the penguin in flight across the level. SpriteKit features a *SKCameraNode* that lets you view the scene through this virtual camera.  However, as it stands there is no in-built functionality to follow a node so you are going to have to build your node tracking solution.
-
-##Add the camera
-
-First you need to add the *SKCameraNode* to the scene.
-
-> [action]
-> Open *GameScene.sks*, drag a *Camera* onto the stage, set *Name* to the highly original `camera` and set *Position* to `(283,160)` which is exactly half the value of your scene size.
-> ![Adding the camera](../Tutorial-Images/xcode_spritekit_add_camera.png)
->
-
-Great, you now have a camera that by default displays the left side of the game scene.  Before you can view the scene through the eye of the camera, you need to assign the camera to the scene.
-
-> [action]
-> Select your *GameScene* and set *camera* to `camera`, it should be available in the drop-down.
-> ![Setting the scene camera](../Tutorial-Images/xcode_spritekit_set_scene_camera.png)
->
-
-Run your game... So yeah it looks pretty much the same :]
-
-##Tracking a node
-
-First up you need to have a target for the camera to follow, this would be the penguin. You will be adding a *target* property to the *GameScene*  class to allow you to track a node and then modify the `update(...)` method to update the camera's position.
-
-> [action]
-> Add the following property to your *GameScene* class:
+> Open *GameScene.swift*
+> Add this new method: 
 >
 ```
-/* Camera helpers */
-var cameraTarget: SKNode?
-```
-> At the end of the `touchesBegan(...)` method add:
->
-```
-/* Set camera to follow penguin */
-cameraTarget = penguin.avatar
-```
->
-
-Now that you have a target for the camera, you need to update the camera's position to follow the target.
-
-> [action]
-> Add this to your `update(...)` method:
->
-```
-/* Check we have a valid camera target to follow */
-if let cameraTarget = cameraTarget {
->
-    /* Set camera position to follow target horizontally, keep vertical locked */
-    camera?.position = CGPoint(x:cameraTarget.position.x, y:camera!.position.y)
+/* Make a Class method to load levels */
+class func level(_ levelNumber: Int) -> GameScene? {
+    guard let scene = GameScene(fileNamed: "Level_\(levelNumber)") else {
+        return nil
+    }
+    scene.scaleMode = .aspectFill
+    return scene
 }
 ```
 >
 
-Run your game... The camera should now follow the penguin and you can finally see the ice block smashing action for yourself.
+# Load Level_1
 
-##Restricting the camera movement
-
-Something isn't quite right here, why does the camera go outside of the game scene?
-
-Although the camera tracks the penguin however it doesn't know to stop when it reaches the bounds of the scene, you are going to improve the camera code using the *clamp* function provided in *SKTUtils*.  
-How do you calculate the **min** and **max** values to use?
-
-A simply way to find the **min** is look at the current default camera position in the *GameScene*, it should be `(283,160)`.
-
-For the **max** you can either move the camera in *GameScene.sks* to see what value makes sense or take a more calculated approach and take the *Size* of the background, which is`960` then subtract the `283` which gives you `677`.
-
-Let's apply this:
+Now load the Level 1. 
 
 > [action]
-> Add the following code after the camera position update in `update(....)`
+> You need to modify code you used to load `GameScene`. Find the block of code
+> below in `MainMenu.swift` inside didMove(to view:) method. 
 >
 ```
-/* Clamp camera scrolling to our visible scene area only */
-camera?.position.x.clamp(283, 677)
+guard let scene = GameScene(fileNamed: "GameScene") else {
+    print("Could not make GameScene, check the name is spelled correctly")
+    return
+}
+```
+> 
+> The line: `GameScene(fileNamed: "GameScene")` is loading `GameScene.swift` with 
+> 'GameScene.sks'. You no longer have 'GameScene.sks' you renamed it 'Level_1.sks'. 
+> You also added a new class method to load levels with a number. Change this look 
+> like this:
+>
+```
+/* Load Game scene */
+guard let scene = GameScene.level(1) else {
+    print("Could not load GameScene with level 1")
+    return
+}
 ```
 >
 
-Run your game... It should hopefully look like this:
+# Test some penguins
 
-![Animated penguin launcher pew pew](../Tutorial-Images/animated_gamescene_launcher_pewpew.gif)
+Test your project in the simulator and tap the screen. Peguins should lay waste to the 
+Seals and Ice Blocks. 
 
-#Restarting the level
+![Peguin Destruction](../Tutorial-Images/p7-06-peguin-destruction.gif)
 
-Now that the player can demolish a level, it also would be great for them to be able to restart the game. Let's add a button to reset the level.
+# Scrolling the scene
 
-You will implement this much like we did for the **Main Menu** using the *MSButtonNode* class.  
+Now that you can shoot penguins, let's improve the experience by tracking the penguin in 
+flight across the level. SpriteKit features a *SKCameraNode* that lets you view the 
+scene through this virtual camera. 
+
+## Add the camera
+
+A camera object gives us point of view through which we can view the scene. With a camera
+you can follow objects and zoom in and out of a scene. The `SKCameraNode` is a subclass
+of `SKNode`. 
+
+> [action]
+> Add a camera to the scene. Open *Level_1.sks* add a camera node from the Object Library.
+> Set the position to `(0, 0)`, and the name to "cameraNode". 
+>
+
+![Add camera to the scene](../Tutorial-Images/p7-06-add-camera.png)
+
+Create a camera by defining a variable and creating a new instance of `SKCameraNode`.
+
+> [action]
+> Open *GameScene.swift*, add the following at the top of the `GameScene` class: 
+> 
+```
+/* Define a var to hold the camera */
+var cameraNode:SKCameraNode!
+```
+> 
+
+Next get a reference to the cameraNode and assign this camera to the scene.  
+
+> [action]
+> Add the following to `didMove(to view:)`.
+> 
+```
+/* Create a new Camera */
+cameraNode = childNode(withName: "cameraNode") as! SKCameraNode
+self.camera = cameraNode
+```
+>
+
+Testing now everything should look the same as before. Even though things look the same 
+the scene is now being viewed from the camera. You can test this out for yourself. Try
+the code below. 
+
+This should zoom the scene out.
+
+`cameraNode.setScale(2)`
+
+Or, this should zoom in. 
+
+`cameraNode.setScale(0.5)`
+
+You dont't want to zoom in or out, at least not yet. For now what you want to do is 
+follow the penguin with the camera. Much of the scene is off camera to the right. 
+When the penguin flies out of view we can't see what's happening. 
+
+To make this happen you will set the position.x of the camera to the position.x of 
+current penguin. This has the potential to move the camera out of bounds on the left or
+the right. To do this you can 'clamp' the value. Clamp is a function that takes a value, 
+min, and max. It might look like this: 
+
+`clamp(value: 50, min: 100, max: 200)`
+
+In this case clamp returns 100 since the value is less than min. Swift provides a clamp
+method but despite this you will have write your own. To understand why you'll have to 
+understand how Swift works with numbers. 
+
+## Numbers - Int, Float, Double, and CGFloat
+
+Numbers in Swift can be different types. There are Doubles, Floats, Ints and more. 
+*SpriteKit* uses CGFloat for almost everything that is a number. 
+
+While Swift has a clamp() funtion that works with Int, Float, and double. 
+There is no clamp function that takes a CGFloat! You will have to make your own.
+
+> [action]
+> Add this new function outside of your `GameScene` class in *GameScene.swift*.
+> 
+```
+func clamp<T: Comparable>(value: T, lower: T, upper: T) -> T {
+    return min(max(value, lower), upper)
+}
+```
+>
+
+This function takes in any *comparable* of Type T for `value`, `lower`, and `upper`. It 
+returns a Type T that is the maximum value between the value and the lower value, 
+and the minimum value between that and the upper value. 
+
+In short this function can take in any type, including CGFloat! 
+
+A *comparable* is any 
+class that comforms to the *comparable* protocol. Comparables are any Type that can be 
+compared using relational operators: >, <, <=, and >=. Read more about 
+[comaprables here](https://developer.apple.com/reference/swift/comparable).
+
+Think of *T* in the function above as standing in for any Type that fits the description. 
+This is called a *generic*. Using a *generic* here allows this function to receive 
+different Types instead of a single fixed type. 
+[Read more about Swift generics here](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Generics.html). 
+
+## Camera Target
+
+You need to have a target for the camera to follow. This may exist or may not exist
+so you can make it an optional. In other words there may be a Penguin for the camera 
+to follow, or there may not be a Penguin for the camera to follow. 
+
+*Optionals* are variables that may have a value or they may have no value 
+in which case their value is *nil*. 
+[Read more about optionals here](https://medium.com/ios-os-x-development/swift-optionals-78dafaa53f3). 
+
+> [action]
+> Add the following at the top of the `GameScene` class. 
+> 
+```
+/* Add an optional camera target */
+var cameraTarget: SKSpriteNode?
+```
+> 
+
+Now set the `cameraTarget` when you make a new Penguin. 
+
+> [Action]
+> Add the following at the end of the `touchesBegan(_ touches: with event:)` method: 
+>
+```
+cameraTarget = penguin
+```
+>
+
+The questionmark (?) after the type declares `cameraTarget` as an *optional*. 
+
+> [action]
+> Find the `func update(_ currentTime:)` method in the `GameScene` class. Add the 
+> following code to check the position of the `cameraTarget` and set the position of the 
+> camera. 
+> 
+```
+/* Check the camera target and follow it */
+if let cameraTarget = cameraTarget {
+    let targetX = cameraTarget.position.x
+    let x = clamp(value: targetX, lower: 0, upper: 392)
+    cameraNode.position.x = x
+}
+```
+
+Test your work. Should look something like this: 
+
+![Camera target Test](../Tutorial-Images/p7-07-camera-target.gif)
+
+Notice the last penguin flies out of view on the right. The camera follows the penguin
+but doesn't move past the right edge of the scene. This is the effect of clamp! When the 
+x position of the penguin is greater than `392` clamp limits the `x` value to `392`, the 
+upper bound.
+
+If the penguin were to somehow fly off the left side of the screen it's x value would 
+be less than 0, and clamp would limit the camera x to 0, the lower bound. 
+
+Try changing the upper value and launching some penguins off the right side. 
+
+# Restarting the level
+
+Now that the player can demolish a level, it also would be great for them to be able to 
+restart the game. Let's add a button to reset the level.
+
+You will implement this much like we did for the **Main Menu** using the *MSButtonNode* 
+class.  
 
 > [info]
-> If you finding yourself needing to create button graphics, I made the *restart.png* with aptly titled [Da Button Factory](http://dabuttonfactory.com/)
+> If you finding yourself needing to create button graphics, I made the *restart.png* 
+> with aptly titled [Da Button Factory](http://dabuttonfactory.com/)
 > If you find something even better, please share it.
 
-Let's add the restart button to the *GameScene*
+Add the restart button to the *GameScene.sks*
 
 > [action]
-> Open *GameScene.sks* and drag the *restart.png* onto stage. I would recommend putting it near the top left corner.
-> Set *Name* to `buttonRestart` and set *Custom Class* to `MSButtonNode`.
+> Open *GameScene.sks* and drag the *restart.png* onto stage. I would recommend putting 
+> it near the top left corner. Set *Name* to `buttonRestart` and set *Custom Class* 
+> to `MSButtonNode`.
 
-Run your game... You will notice the restart button is stuck to the game scene, it would be nice for the UI to sit on top of the scene so it's always accessible no matter where the camera is.
+Run your game... Fire some Penguins. Notice the restart button is stuck in the upper 
+left corner, and it disappears when the camera moves off the right. It would be nice if  
+button moved with the camera so it was always available on screen. You can make this
+happen by setting the button's parent to the camera. 
 
 > [action]
-> Select the **restart button** and set *Parent* to `camera`.
+> Select the **restart button** and set *Parent* to `cameraNode`.
 
-![UI Button](../Tutorial-Images/xcode_spritekit_button_parent.png)
+![UI Button](../Tutorial-Images/p7-07-reset-button-parent.png)
 
-Next you need to code connect the button and add a **selectedhandler** to restart the *GameScene*, can you do this yourself?
+The next step is to run some code that will reload this scene when you tap the *restart
+button*. Can you do this yourself? Consult the *play button* in `MainMenu` and look at 
+`didMove(to view:)` in `GameScene`. Here are the steps: 
 
-**Hint:** Look at the *MainScene* button implementation.
+- Declare a `var` for buttonRestart and set the reference in `didMove(to view:)`
+- define a block of code to run in the button's `selectedHandler`
+- Create a new scene with `GameScene.level(n)`
+- Present the scene
 
 > [solution]
 > Open *GameScene.sks* and add the code connection property to the *GameScene* class:
@@ -218,44 +334,34 @@ Next you need to code connect the button and add a **selectedhandler** to restar
 var buttonRestart: MSButtonNode!
 ```
 >
-> Add the connection to the `didMoveToView(...)`:
+> Add the connection to the `didMove(to view:)`:
 >
 ```
 /* Set UI connections */
-buttonRestart = childNodeWithName("//buttonRestart") as! MSButtonNode
+buttonRestart = childNode(withName: "//buttonRestart") as! MSButtonNode
 ```
 >
-> Add the selectedhandler to restart the *GameScene* in `didMoveToView(...)`:
+> Still in `didMove(to view:)` add the selectedhandler to restart the *GameScene*:
 >
 ```
-/* Setup restart button selection handler */
+/* Reset the game when the reset button is tapped */
 buttonRestart.selectedHandler = {
->
-/* Grab reference to our SpriteKit view */
-let skView = self.view as SKView!
->
-/* Load Game scene */
-let scene = GameScene(fileNamed:"GameScene") as GameScene!
->
-/* Ensure correct aspect mode */
-scene.scaleMode = .AspectFill
->
-/* Show debug */
-skView.showsPhysics = true
-skView.showsDrawCount = true
-skView.showsFPS = false
->
-/* Restart game scene */
-skView.presentScene(scene)
+    guard let scene = GameScene.level(1) else {
+        print("Level 1 is missing?")
+        return
+    }
+>    
+    scene.scaleMode = .aspectFill
+    view.presentScene(scene)
 }
 ```
 >
 
-Great!
+Great! Run your game... Your **Restart button** should be fully operational.
 
-Run your game... Your **Restart button** should be fully operational.
+![Reset button test](../Tutorial-Images/p7-08-reset-button-test.gif)
 
-#Summary
+# Summary
 
 Congrats! This is starting to look like an actual game.
 You learnt to:
@@ -265,4 +371,5 @@ You learnt to:
 - Using *SKCameraNode* and tracking a node
 - Adding a restart button
 
-In the next chapter you are going to learn how to take the physics to the next level and model a catapult.
+In the next chapter you are going to learn how to take the physics to the next level and 
+model a catapult.

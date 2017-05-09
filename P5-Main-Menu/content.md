@@ -3,144 +3,163 @@ title: Adding the main menu
 slug: main-menu
 ---
 
-Now you are going to setup the essential main menu screen. That start menu will then lead the player into the gameplay scene that you will develop in the next chapter.
+Now you are going to setup the essential main menu screen. That start menu will then lead 
+the player into the gameplay scene that you will develop in the next chapter.
 
-#Adding the Main Scene
+The scene will be made of two parts:
+
+1. MainMenu.swift - contains all of the code that controls the scene.
+2. MainMenu.sks - is a visual editor that that holds all of the objects in the scene.
+
+# Adding the Main Scene
 
 You are going to create a new *Scene* for the main menu.
 
 > [action]
 > Create a new SKS file (`File > New > File > SpriteKit Scene`) and name it `MainMenu.sks`
-> Set the main menu *Scene Size* to `(568,320)`
+> Set the main menu *Scene Size* to `(568, 320)`, and anchor point to `(0, 0)`
 >
-> ![MainScene attributes](../Tutorial-Images/xcode_new_mainscene_attributes.png)
+> ![MainScene attributes](../Tutorial-Images/p5-01-menu-scene.png)
 
-##Adding the background
+## Adding the background
 
 > [action]
 > Drag *menubackground.png* to the scene and snap it to the bottom-left corner.
 > Set *Z-Position* to `-1` to ensure the background is always at the back.
+>
+> ![menu background](../Tutorial-Images/p5-02-menu-scene.png)
 
-#Creating the play button
+## Add MSButtonNode
+
+Add the MSButtonNode class to your project. If you've improved the *MSButtonNode* class 
+in the *Hoppy Bunny Tutorial* and made it epic. Please feel free to reuse your copy in 
+this project.
+
+> [action]
+> [Download MSButtonNode.swift](../MSButtonNode.swift) and drag the file into your project, 
+> ensuring *Copy items if needed* is checked.
+
+
+# Creating the play button
 
 The main menu needs a play button to trigger the transition into the *GameScene*.
 
 > [action]
-> SpriteKit does not provide any button objects, so you will need to use our assets as you did in the *Hoppy Bunny Tutorial*.
+> SpriteKit does not provide any button objects, so you will need to use our assets as you 
+> did in the *Hoppy Bunny Tutorial*.
 > Drag *button.png* into the scene, place it wherever looks good to you.
-> You will need to create a code connection to link this button to your code so set the *Name* to `buttonPlay`, you will also need to set the *Custom Class* to `MSButtonNode`:
+> Then set the name of the button to `buttonPlay`. 
 >
-> ![Setting a custom class](../Tutorial-Images/xcode_spritekit_custom_class.png)
+> ![Setting a custom class](../Tutorial-Images/p5-03-button-name.png)
+>
+> Now create a code connection to link this button to your code. Set the 
+> the *Custom Class* to `MSButtonNode`:
+>
+> ![Setting a custom class](../Tutorial-Images/p5-03-msbuttonnode.png)
 >
 
-If you've improved the *MSButtonNode* class in the *Hoppy Bunny Tutorial* and made it epic.  Please feel free to reuse it in this project.
+## Coding the main scene
+
+Let's add a new *MainMenu.Swift* file to facilitate functionality for 
+*MainMenu.sks*.
 
 > [action]
-> ![Download MSButtonNode.swift](https://github.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift/raw/master/MSButtonNode.swift) and drag the file into your project, ensuring *Copy items if needed* is checked.
-
-Run the game...
-
-#Launching the Main Scene
-
-Where's the shiny new menu?
-By default a new game project will load the *GameScene*, you need to change this to *MainScene*.
-
-> [action]
-> Open *GameViewController.swift* and modify the following line:
+> Create a new empty Swift file (`File > New > File > Swift File`) and name it 
+> `MainMenu.swift`
+> Ensure your new class reads as follows
 >
-```
-if let scene = GameScene(fileNamed:"GameScene") {
-```
-> Replace with:
-```
-if let scene = GameScene(fileNamed:"MainScene") {
-```
-
-Run your game...
-
-![Screenshot main menu](../Tutorial-Images/screenshot_mainmenu.png)
-
-Looks good, you can even touch the button.  However, it doesn't do anything other than print out the following in the debug console:
-
-![console debug button action](../Tutorial-Images/xcode_debug_console_button.png)
-
-##Coding the main scene
-
-Let's add a new partner *MainScene.Swift* file to facilitate functionality for *MainScene.sks*.
-
-> [action]
-> Create a new empty Swift file (`File > New > File > Swift File`) and name it `MainScene.swift`
-> Ensure your new class reads as follows:
+> ![Add MainMenu.swift](../Tutorial-Images/p5-05-mainmenu-swift.png)
 >
 ```
 import SpriteKit
 >
-class MainScene: SKScene {
+class MainMenu: SKScene {
 >    
     /* UI Connections */
     var buttonPlay: MSButtonNode!
 >    
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         /* Setup your scene here */
 >        
         /* Set UI connections */
-        buttonPlay = self.childNodeWithName("buttonPlay") as! MSButtonNode
->        
+        buttonPlay = self.childNode(withName: "buttonPlay") as! MSButtonNode
+>    
         /* Setup restart button selection handler */
         buttonPlay.selectedHandler = {
->            
+>       
             /* Grab reference to our SpriteKit view */
-            let skView = self.view as SKView!
->          
+            guard let skView = self.view as SKView! else {
+                print("Could not get Skview")
+                return
+            }
+>            
             /* Load Game scene */
-            let scene = GameScene(fileNamed:"GameScene") as GameScene!
+            guard let scene = GameScene(fileNamed:"GameScene") else {
+                print("Could not make GameScene, check the name is spelled correctly")
+                return
+            }
 >            
             /* Ensure correct aspect mode */
-            scene.scaleMode = .AspectFill
->            
+            scene.scaleMode = .aspectFill
+>           
             /* Show debug */
             skView.showsPhysics = true
             skView.showsDrawCount = true
             skView.showsFPS = true
->            
+>
             /* Start game scene */
             skView.presentScene(scene)
         }
->
     }
->
 }
 ```
 >
 
-This code creates the code connection for the button and sets up the *selectedHandler* to launch your *GameScene* when the button is touched.  
+This code creates the code connection for the button and sets up the *selectedHandler* 
+to launch your *GameScene* when the button is touched.
 
-Run the game... Oh it doesn't work?
+# Launching the Main Scene
 
-##Initializing the Main Scene
-
-Although the *MaineScene.sks* is displayed, it's not connected to your *MainScene.swift*. This is easly rectified.
+By default a new game project will load the *GameScene*, you need to change this to 
+load *MainScene* instead. The entry poin or your game is `GameViewController.swift`. 
 
 > [action]
-> Open `GameViewController.swift`, remember this line:
+> Open *GameViewController.swift* and modify the following line inside `viewDidLoad()`:
 >
 ```
-if let scene = GameScene(fileNamed:"MainScene") {
+if let scene = SKScene(fileNamed: "GameScene") {
 ```
 > Replace with:
->
 ```
-if let scene = MainScene(fileNamed:"MainScene") {
+if let scene = MainMenu(fileNamed: "MainMenu") {
 ```
->
+
+The `viewDidLoad()` method in `GameViewController` is called when this view controller 
+appears on the screen, at which time we load the first scene: MainMenu. 
+
+Here you created an instance of MainMenu.swift which is an SKScene. When loading a Scene 
+you can also load it with a sks file using `SKScene(fileNamed:)`. In your case use used: 
+`MainMenu(fileNamed: "MainMenu")` to create an instance of MainMenu (from MainMenu.swift)
+with the MainMenu.sks scene. 
+
+Run your game...
+
+![Screenshot main menu](../Tutorial-Images/p5-04-button-test.png)
+
+If the Simulator shows your game in portrait choose Hardware > Rotate Right 
+(or Command+Right-arrow)
+
+Looks good, you can even touch the button. However, it doesn't do anything other than 
+print: "No button action set".
 
 Run the project...
 
-You should now be able to touch the **Play** button and be presented with an empty *GameScene*.
+You should now be able to touch the **Play** button and be presented with an empty 
+*GameScene*.
 
-#Summary
+# Summary
 
-You've learnt to:
+You've learned to:
 
 - Implement multiple scenes
 - Change the default launch scene

@@ -5,9 +5,12 @@ slug: physics-penguin
 
 Ready to try out the catapult on the penguins?
 
-You already know how to dynamically add a new penguin to the scene, this time when you add a new penguin you're going to pin joint it to the catapult arm and then release it when the player lets go of the catapult arm and watch physics in action.  Let's add a new *penguinJoint* for this purpose.
+You already know how to dynamically add a new penguin to the scene, this time when 
+you add a new penguin you're going to pin joint it to the catapult arm and then release 
+it when the player lets go of the catapult arm and watch physics in action. Let's add 
+a new *penguinJoint* for this purpose.
 
-#Pinning the penguin
+# Pinning the penguin
 
 > [action]
 > Add this property to your *GameScene* class:
@@ -17,68 +20,73 @@ var penguinJoint: SKPhysicsJointPin?
 ```
 >
 
-When the player touch begins, you want to spawn a penguin and then pin it to the bucket area of the catapult arm.
+When the player touch begins, you want to spawn a penguin and then pin it to the bucket 
+area of the catapult arm.
 
 > [action]
-> Add this code to the `touchesBegan(...)` method immediately after the **touchJoint** code:
+> Add this code to the `touchesBegan(_ touches: with event:)` method immediately after 
+> the **touchJoint** but still inside the if statement block. 
+> code:
 >
 ```
-/* Add a new penguin to the scene */
-let penguin = MSReferenceNode(fileNamed: "Penguin") as MSReferenceNode!
+let penguin = Penguin()
 addChild(penguin)
->
-/* Position penguin in the catapult bucket area */
-penguin.avatar.position = catapultArm.position + CGPoint(x: 32, y: 50)
->
-/* Improves physics collision handling of fast moving objects */
-penguin.avatar.physicsBody?.usesPreciseCollisionDetection = true
->
-/* Setup pin joint between penguin and catapult arm */
-penguinJoint = SKPhysicsJointPin.jointWithBodyA(catapultArm.physicsBody!, bodyB: penguin.avatar.physicsBody!, anchor: penguin.avatar.position)
-physicsWorld.addJoint(penguinJoint!)
->
-/* Set camera to follow penguin */
-cameraTarget = penguin.avatar
+penguin.position.x += catapultArm.position.x + 20
+penguin.position.y += catapultArm.position.y + 50
+penguin.physicsBody?.usesPreciseCollisionDetection = true
+penguinJoint = SKPhysicsJointPin.joint(withBodyA: catapultArm.physicsBody!,
+                                       bodyB: penguin.physicsBody!,
+                                       anchor: penguin.position)
+physicsWorld.add(penguinJoint!)
+cameraTarget = penguin
 ```
 >
 
-Most of this should be fairly easy to understand for you by now.  The code is very similar to the original beta launcher.  The manual impulse has been removed and replaced with create a pin joint between the penguin and the catapult arm.  This joint will be maintained until the player releases their touch.
+The code is very similar to the original beta launcher. The manual impulse has been 
+removed and replaced with create a pin joint between the penguin and the catapult arm. 
+This joint will be maintained until the player releases their touch.
 
-##Let it go
+## Let it go
 
-As in the previous chapter, you need to release the *penguinJoint* when the player releases their touch.
+To get the penguin to fly we need to remove the *penguinJoint* when the player 
+releases their touch.
 
-Can you add this joint removal yourself?
+To make the system work more reliably you will give the penguin an impulse at a vector
+that is perpendicular to the catapult arm. 
 
 > [solution]
-> Add the following to the `touchesEnded(...)` method:
+> Add the following to the `touchesEnded(_ touches: with event:)` method:
 >
 ```
-if let penguinJoint = penguinJoint { physicsWorld.removeJoint(penguinJoint) }
+// Check for a touchJoint then remove it. 
+if let touchJoint = touchJoint {
+    physicsWorld.remove(touchJoint)
+}
+// Check for a penguin joint then remove it. 
+if let penguinJoint = penguinJoint {
+    physicsWorld.remove(penguinJoint)
+}
+// Check if there is a penuin assigned to the cameraTarget
+guard let penguin = cameraTarget else {
+    return
+}
+// Generate a vector and a force based on the angle of the arm.
+let force: CGFloat = 350
+let r = catapultArm.zRotation
+let dx = cos(r) * force
+let dy = sin(r) * force
+// Apply an impulse at the vector. 
+let v = CGVector(dx: dx, dy: dy)
+penguin.physicsBody?.applyImpulse(v)
 ```
 >
 
-#Tuning
+You can give this a test in the simulator. There is still more work to do but at this point
+the core game mechanic should be functioning. Be aware that dragging the arm too far back 
+may throw the penguin way over the top, and after the penguin flies you are not able to 
+get back to the camera unless you press reset. 
 
-Now run the game and launch a couple of penguins! It's very important that everything feels right for the player.
-Tuning your physics simulation is very important, what might be realistic may not be much fun.  You're aiming to get that balance just right and hit the sweet spot.
-
-SpriteKit makes it very easy to change different physics properties, such as mass, friction, etc:
-
-Let's try a tweak on our catapult, if you notice when the game starts the catapult looks like it's swinging in the breeze.  You can apply an easy tweak to make this look better.  
-
-Let's remove gravity on the catapultArm, this will stop the see-saw effect.
-
-> [action]
-> Change this body property to:
-```
-catapultArmBody.affectedByGravity = false
-```
->
-
-Run your game... Looking tight.
-
-#Summary
+# Summary
 
 Well done! You have the first fully playable prototype build.
 
