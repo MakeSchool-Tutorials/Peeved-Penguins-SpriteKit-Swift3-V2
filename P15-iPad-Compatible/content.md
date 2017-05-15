@@ -3,7 +3,8 @@ title: Make it iPad compatible
 slug: ipad-compatible
 ---
 
-SpriteKit allows you to adapt your game for the iPad without having to supply new assets and only requires making a few small changes.
+SpriteKit allows you to adapt your game for the iPad without having to supply new assets 
+and only requires making a few small changes.
 
 # iPad Tweaks
 
@@ -25,9 +26,11 @@ Let's fix the orientation issue first, as this game should only ever be ran in l
 
 Run your game again, it should be landscape only now.
 
-##Aspect
+## Aspect
 
-Currently you are using a scene *scaleMode* or `.AspectFill` which looks great on the iPhone.  However, for the iPad you can't see all of the game content.  Let's try another scale mode.
+Currently you are using a scene *scaleMode* or `.AspectFill` which looks great on the 
+iPhone.  However, for the iPad you can't see all of the game content.  Let's try another 
+scale mode.
 
 > [action]
 > Switch to the *Find Navigator* tab and search for `AspectFill`
@@ -39,7 +42,9 @@ Currently you are using a scene *scaleMode* or `.AspectFill` which looks great o
 
 Run your game...
 
-Looking better, the only minor point is the letterbox effect.  However, this is more than acceptable for the minimal amount of work required to achieve this compatibility.  Some games simply add a decoration border to fill this space.
+Looking better, the only minor point is the letterbox effect.  However, this is more 
+than acceptable for the minimal amount of work required to achieve this compatibility.  
+Some games simply add a decoration border to fill this space.
 
 Yet the *GameScene* does not look quite right.
 
@@ -55,8 +60,9 @@ This is actually an easy fix, it helps if all nodes are centered correctly.
 
 Run your game... YES! :]
 
-#Summary
+# Summary
 
-Congrats on finishing *Peeved Penguins*, give yourself or the person next to you a high five.
+Congrats on finishing *Peeved Penguins*, give yourself or the person next to you a high 
+five.
 
 The next chapter will be a recap of everything you have covered so far, well done.
