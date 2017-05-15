@@ -6,11 +6,36 @@ slug: physics-contact-collisions
 Next you'll learn how to setup the physics body *Contact Masks* and use that knowledge 
 to remove seals when they are hit by penguins, ice blocks or even each other.
 
+Before we continue let's clarify some terminology. 
+
+**Categories** 
+
+Categories refer to different groups of objects. In your game Penguins, Ice Blocks, 
+and Seals would be different categories. We need to know when Peguins and Ice Blocks 
+hit Seals. 
+
+**Contact**
+
+Contact refers to two physics objects making contact. A contact does NOT represent a
+physical insteaction! In other words you can create two objects that pass through 
+each other but produce a contact when they overlap. 
+
+We might want to know when Penguins, or Ice Blocks contact a Seal.
+
+**Collision** 
+
+Collision refers to a physical interaction between objects. Objects that show physical 
+interactions stop, bounce, and knock each other around. 
+
+Our game needs collisions between Penguins, Ice Blocks, Ground, Seals, and Catapult Arm. 
+
 # The Physics contact delegate
 
-What you as developer need to do is to add *meaning* to different kinds of collisions. 
-In the game a meaningful collision is one between a *seal* and any other object in the 
-game.
+In the course of playing contactc between some of the objects is meaningful. For example
+when an Ice Block or a Penguin hits a Seal we want to know. If the collision is hard
+enough we want to remove the Seal. 
+
+A contact is a message letting us know that two objects made contact. 
 
 In SpriteKit you can do this by implementing the *SKPhysicsContactDelegate*. Let's add 
 this protocol to the *GameScene* class, so you can get information on the collision 
@@ -38,27 +63,21 @@ physicsWorld.contactDelegate = self
 
 # Physics masks
 
-Each *physicsBody* has a property called *categoryBitMask*. This category is 
-to identify different categories of physics objects. Categories might be things like: 
+Bit masks are numbers where each bit in the number acts as a switch. Computers keep 
+track of numbers using bits. An 8 bit number is made up 8 bits. Which you can picture as:
 
-- penguins
-- seals
-- ice blocks
-- catapult
-- patapult arm
-- ground
-- game boundaries
-- etc. 
+- 00000000
 
-Categories represent groups of objects rather than individual objects.
+That would be 0. 
 
-The *categoryBitMask* is type: UInt32, a 32 bit *unsigned* (always positive) integer 
-(whole number). You could describe this as any positive whole number from 0 to 4294967295. 
-What's most important to understand is that SpriteKit is only concerned with the *bits*, 
-that's why it's called category**Bit**Mask. The 
+- 00000000 = 0
+- 00000001 = 1
+- 00000010 = 2
+- 00000011 = 3
+- 00000100 = 4
+- 00000101 = 5
 
-Every integer value is represented by a binary value made up of bits. A bit is just 1 or 
-0. A UInt32 is a value made from 32 bits. Here are some examples: 
+As 32 bit numbers they would look like this: 
 
 - 0 = 00000000 00000000 00000000 00000000
 - 1 = 00000000 00000000 00000000 00000001
@@ -70,14 +89,53 @@ Every integer value is represented by a binary value made up of bits. A bit is j
 - 7 = 00000000 00000000 00000000 00000111
 - 8 = 00000000 00000000 00000000 00001000
 
-In our game so far we have the following categories. We have more objects but these are 
-the object that we want to track collisions and contacts. 
+The physics system used in SpriteKit uses 32 bit numbers to manage physics categories, 
+contacts, and collisions. This allows you to create many different kinds of interactions 
+between objects in the games you create.
 
-- 00000000 = 0 None
-- 00000001 = 1 Penguin
-- 00000010 = 2 Seal 
-- 00000100 = 4 Ice Block
-- 00001000 = 8 Ground
+# Category Bitmask
+
+Each *physicsBody* has a property called *categoryBitMask*. This *categoryBitMask* is used
+to identify different categories of physics objects. Categories might be things like: 
+
+- 00000000 = 0 None - use this for objects that do not interact with other objects
+- 00000001 = 1 Penguin - use this for peguins we fling
+- 00000010 = 2 Seal - Use this for Seals 
+- 00000100 = 4 Ice Block - Use this Ice blocks
+- 00001000 = 8 Ground - This identifies the ground
+
+Categories should usually be numbers with only a single 1 bit! Notice each of the numebrs
+above are 1, 2, 4, 8. We skipped 3 (00000011) which would represent the same category as
+Penguin 1 (00000001) and Seal 2 (00000010). 
+
+## Contact Bitmask 
+
+A contact bit mask says which categories produce a message when they make contact. For 
+example an object with a `contactBitmask` of 3 (00000011) would produce a message when 
+it hit an object with a category of 1 (00000001) or 2 (00000010). 
+
+- 00000001
+- 00000010
+- 00000011 <- Shares the first and second bit with 1 and 2. 
+
+## Collision Bitmask
+
+The `collisionBitmask` determines which objects show physical interaction. Set the bits 
+to 1 for each category of object that **collides** with another object. For example
+Penguins collide with Seals, Ice Blocks, and the Ground. 
+
+- 000000001 = 1 = Penguin category
+- 000000010 = 2 = Seal category
+- 000000100 = 4 = Ice Block category
+- 000001000 = 8 = Ground category
+- 000001110 = 14 = Peguin collision bitmask
+
+Penguin collision = Seal + Ice Block + Ground = 2 + 4 + 8 = 14
+
+Notice that Penguins don't collide with other Penguins! If Penguins need to collide with 
+other Penguins their `collisionBitMask` would be:
+
+Penguin collision = Penguin + Seal + Ice Block + Ground = 1 + 2 + 4 + 8 = 15
 
 ## Bitwise operations 
 
@@ -124,10 +182,6 @@ then the answer is 1. Here is an examples:
 = 00000111
 ```
 
-
-
-
-
 You remember that you setup the penguin with a **Category Mask** of `1` and the seal 
 with `2`. When a collision takes place you will be checking the *categoryBitMask* for a 
 value of `2` to identify when a seal has been involved in a collision.
@@ -153,7 +207,7 @@ You will need to implement the *beginContact(...)* delegate method that will inf
 > Add this method to the *GameScene* class:
 >
 ```
-func didBeginContact(contact: SKPhysicsContact) {
+func didBegin(_ contact: SKPhysicsContact) {
     /* Physics contact delegate implementation */
 >
     /* Get references to the bodies involved in the collision */
@@ -199,42 +253,48 @@ print("Seal Hit")
 if contact.collisionImpulse > 2.0 {
 >
     /* Kill Seal(s) */
-    if contactA.categoryBitMask == 2 { dieSeal(nodeA) }
-    if contactB.categoryBitMask == 2 { dieSeal(nodeB) }
+    if contactA.categoryBitMask == 2 { dieSeal(node: nodeA) }
+    if contactB.categoryBitMask == 2 { dieSeal(node: nodeB) }
 }
 ```
 >
 
-##Removing the seal
+## Removing the seal
 
-First you retrieve the collision impulse between the seal and the other object. If this impulse is large enough you decide to remove the seal by using the *dieSeal* method.
+First you retrieve the collision impulse between the seal and the other object. If this 
+impulse is large enough you decide to remove the seal by using the *dieSeal* method.
 
 > [action]
 > Add the *dieSeal* method to your *GameScene* class:
 >
 ```
 func dieSeal(node: SKNode) {
-  /* Seal death*/
+   /* Seal death*/
 >
-  /* Create our hero death action */
-  let sealDeath = SKAction.runBlock({
-      /* Remove seal node from scene */
-      node.removeFromParent()
-  })
->
-  self.runAction(sealDeath)
->
+   /* Create our hero death action */
+   let sealDeath = SKAction.run({
+        /* Remove seal node from scene */
+        node.removeFromParent()
+    })
+    self.run(sealDeath)
 }
 ```
 >
 
-This code should be fairly familiar, yet one does not simply call`removeFromParent()` directly...
+This code should be fairly familiar, yet one does not simply call`removeFromParent()` 
+directly...
 
-In the physics simulation you need to ensure that the seal is removed at the right time, in the SpriteKit frame render cycle there is a **post-physics** step called *didSimulatePhysics* after the physics simulation is complete for the current frame.  At this point it's safe to remove a physics body, otherwise you can run into problems with triggering collisions on bodies that have been removed, resulting in a horrible game crash.  If you wrap this in an *SKAction*, SpriteKit will ensure it's executed at the right time in the render cycle.
+In the physics simulation you need to ensure that the seal is removed at the right time, 
+in the SpriteKit frame render cycle there is a **post-physics** step called 
+*didSimulatePhysics* after the physics simulation is complete for the current frame. 
+At this point it's safe to remove a physics body, otherwise you can run into problems 
+with triggering collisions on bodies that have been removed, resulting in a horrible 
+game crash.  If you wrap this in an *SKAction*, SpriteKit will ensure it's executed at 
+the right time in the render cycle.
 
-#Summary
+# Summary
 
-The game mecanic is nearly finished, you've learnt to:
+The game mecanic is nearly finished, you've learned to:
 
 - Implement the physics *SKPhysicsContactDelegate*
 - Using the **categoryBitMask** to identify physics bodies in a collision
