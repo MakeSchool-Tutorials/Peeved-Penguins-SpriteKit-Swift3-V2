@@ -209,18 +209,14 @@ You will need to implement the *beginContact(...)* delegate method that will inf
 ```
 func didBegin(_ contact: SKPhysicsContact) {
     /* Physics contact delegate implementation */
->
     /* Get references to the bodies involved in the collision */
     let contactA:SKPhysicsBody = contact.bodyA
     let contactB:SKPhysicsBody = contact.bodyB
->
     /* Get references to the physics body parent SKSpriteNode */
     let nodeA = contactA.node as! SKSpriteNode
     let nodeB = contactB.node as! SKSpriteNode
->
     /* Check if either physics bodies was a seal */
     if contactA.categoryBitMask == 2 || contactB.categoryBitMask == 2 {
->
        print("Seal Hit")
     }
 }
@@ -229,15 +225,22 @@ func didBegin(_ contact: SKPhysicsContact) {
 
 Run your game...
 
-You should see the log message appear in the console every time a seal is hit.  You may notice you a few seal hits at the start, currently this code is super sensitive, the act of adding *Level1.sks* to the scene will mostly generate a contact event as the seal gently touches the ground when they are first added to the scene.
+You should see the log message appear in the console every time a seal is hit.  You may 
+notice you a few seal hits at the start, currently this code is super sensitive, the act 
+of adding *Level1.sks* to the scene will mostly generate a contact event as the seal 
+gently touches the ground when they are first added to the scene.
 
-#Hitting on seals, hard
+# Destroying Seals
 
-Now that you know that the collision handler is working, let's implement the real functionality. What you want is a way to check how hard the seal was hit and use that to decided if you should ignore the collision or destroy the seal.  
+Now that you know that the collision handler is working, let's implement the real 
+functionality. What you want is a way to check how hard the seal was hit and use that to 
+decided if you should ignore the collision or destroy the seal.  
 
-SpriteKit to the rescue, you can utilize the *collisionImpulse* property of the collision to gauge the resulting impact force from the collision.
+SpriteKit to the rescue, you can utilize the *collisionImpulse* property of the collision 
+to gauge the resulting impact force from the collision.
 
-To keep things clean let's setup a separate seal removal method. You'll be adding more functionality to this method later.
+To keep things clean let's setup a separate seal removal method. You'll be adding more 
+functionality to this method later.
 
 > [action]
 > Replace:

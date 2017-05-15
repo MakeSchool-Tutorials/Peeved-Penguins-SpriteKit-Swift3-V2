@@ -16,8 +16,13 @@ The scene will be made of two parts:
 You are going to create a new *Scene* for the main menu.
 
 > [action]
+<<<<<<< HEAD
 > Create a new SKS file (`File > New > File > SpriteKit Scene`) and name it `MainMenu.sks`
 > Set the main menu *Scene Size* to `(568, 320)`, and anchor point to `(0, 0)`
+=======
+> Create a new SKS file (`File > New > File > SpriteKit Scene`) and name it `MainScene.sks`
+> Set *Scene Size* to `(568,320)`
+>>>>>>> MakeSchool-Tutorials/master
 >
 > ![MainScene attributes](../Tutorial-Images/p5-01-menu-scene.png)
 
@@ -36,8 +41,12 @@ in the *Hoppy Bunny Tutorial* and made it epic. Please feel free to reuse your c
 this project.
 
 > [action]
+<<<<<<< HEAD
 > [Download MSButtonNode.swift](../MSButtonNode.swift) and drag the file into your project, 
 > ensuring *Copy items if needed* is checked.
+=======
+> [Download MSButtonNode.swift](https://raw.githubusercontent.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift-Solution/master/PeevedPenguinBuild/MSButtonNode.swift) and drag the file into your project, ensuring *Copy items if needed* is checked.
+>>>>>>> MakeSchool-Tutorials/master
 
 
 # Creating the play button
@@ -120,8 +129,12 @@ to launch your *GameScene* when the button is touched.
 
 # Launching the Main Scene
 
+<<<<<<< HEAD
 By default a new game project will load the *GameScene*, you need to change this to 
 load *MainScene* instead. The entry poin or your game is `GameViewController.swift`. 
+=======
+Although the *MaineScene.sks* is displayed, it's not connected to your *MainScene.swift*. This is easily rectified.
+>>>>>>> MakeSchool-Tutorials/master
 
 > [action]
 > Open *GameViewController.swift* and modify the following line inside `viewDidLoad()`:

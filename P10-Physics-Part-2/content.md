@@ -29,7 +29,13 @@ area of the catapult arm.
 > code:
 >
 ```
+<<<<<<< HEAD
 let penguin = Penguin()
+=======
+/* Add a new penguin to the scene */
+let resourcePath = NSBundle.mainBundle().pathForResource("Penguin", ofType: "sks")
+let penguin = MSReferenceNode(URL: NSURL (fileURLWithPath: resourcePath!))
+>>>>>>> MakeSchool-Tutorials/master
 addChild(penguin)
 penguin.position.x += catapultArm.position.x + 20
 penguin.position.y += catapultArm.position.y + 50

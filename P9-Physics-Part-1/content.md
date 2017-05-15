@@ -32,8 +32,12 @@ you will join together. Two physics objects can be connected to each other using
 Try it out for yourself. 
 
 > [action]
+<<<<<<< HEAD
 > Open *Level_1.sks* select the *catapultArm* and look for *Physics Definition* and set 
 > the *Body Type* to *Bounding Rectangle*. 
+=======
+> Open *GameScene.sks* and enable physics on the **catapult** and **catapultArm** . Set *Body Type* to `Alpha mask`.
+>>>>>>> MakeSchool-Tutorials/master
 >
 
 While the shape of the arm is not exactly a rectangle, the shape is close to a rectangle. 
@@ -70,11 +74,43 @@ Let's revise the physics bodies.
 
 ![Catapult body settings](../Tutorial-Images/p9-03-catapult-body.png)
 
+<<<<<<< HEAD
 You need a reference to both the *catapult* and the *catapultArm* to set up the joint.
 
 > [action]
 > Make sure you have a reference to both *catapult* and *catapultArm* at the top of 
 > *GameScene.swift* 
+=======
+You already have a code connection for the **catapultArm**, can you code connect the **catapult** as well?
+
+> [action]
+> Try and create a code connection for the `catapult`.
+>
+> Remember to set the *Name*, a sensible value would be `catapult`
+
+Next you are going to manually setup the *Physics Body* for the **catapultArm**.
+
+> [action]
+> Add the following to `didMoveToView(...)` after the level loading code.
+>
+```
+/* Create catapult arm physics body of type alpha */
+let catapultArmBody = SKPhysicsBody (texture: catapultArm!.texture!, size: catapultArm.size)
+>
+/* Set mass, needs to be heavy enough to hit the penguin with solid force */
+catapultArmBody.mass = 0.5
+>
+/* Apply gravity to catapultArm */
+catapultArmBody.affectedByGravity = true
+>
+/* Improves physics collision handling of fast moving objects */
+catapultArmBody.usesPreciseCollisionDetection = true
+>
+/* Assign the physics body to the catapult arm */
+catapultArm.physicsBody = catapultArmBody
+```
+>
+>>>>>>> MakeSchool-Tutorials/master
 
 You already have a code connection for the **catapultArm**, can you connect the 
 **catapult** as well. Remember to set the *Name*, a sensible value would be `catapult`.
@@ -92,13 +128,21 @@ You already have a code connection for the **catapultArm**, can you connect the
 > `catapult = childNode(withName: "catapult") as! SKSpriteNode`
 >
 
+<<<<<<< HEAD
 # Creating a Physics body and a joint
+=======
+#Your first joint
+>>>>>>> MakeSchool-Tutorials/master
 
 Next you are going to manually setup the *Physics Body* for the **catapultArm**. Your 
 code is getting pretty long, it's a good idea to organize code into functions. 
 
 > [action]
+<<<<<<< HEAD
 > Add this method to the `GameScene` class.  
+=======
+> Add the following to the end of your `didMoveToView(...)` method:
+>>>>>>> MakeSchool-Tutorials/master
 >
 ```
 func setupCatapult() {
@@ -173,6 +217,7 @@ Time to finally join these bodies together using a *SKPhysicsJointSpring*.
 >
 ```
 /* Spring joint catapult arm and cantilever node */
+<<<<<<< HEAD
 var anchorAPosition = catapultArm.position
 anchorAPosition.x += 0
 anchorAPosition.y += 50
@@ -180,6 +225,13 @@ let catapultSpringJoint = SKPhysicsJointSpring.joint(withBodyA: catapultArm.phys
 physicsWorld.add(catapultSpringJoint)
 catapultSpringJoint.frequency = 6
 catapultSpringJoint.damping = 0.5
+=======
+let catapultSpringJoint = SKPhysicsJointSpring.jointWithBodyA(catapultArm.physicsBody!, bodyB: cantileverNode.physicsBody!, anchorA: catapultArm.position + CGPoint(x:15, y:30), anchorB: cantileverNode.position)
+physicsWorld.addJoint(catapultSpringJoint)
+>
+/* Make this joint a bit more springy */
+catapultSpringJoint.frequency = 1.5
+>>>>>>> MakeSchool-Tutorials/master
 ```
 >
 
@@ -229,7 +281,7 @@ The *touchNode* will require a code connection.
 > [action]
 > Add the code to connect the *touchNode* yourself.
 
-In case you want to double or triple check your code connections so far in this section:
+Let's double check the code connections so far in this section:
 
 > [action]
 > Ensure your *GameScene* class properties include:
@@ -254,10 +306,14 @@ touchNode = childNode(withName: "touchNode") as! SKSpriteNode
 
 ## Dynamic joints
 
+<<<<<<< HEAD
 Next up you will be dynamically creating a sprint joint whenever the player touches the 
 catapult arm to initiate pulling back the catapult.  It needs to be accessible to your 
 class as when the player lets go of the catapult arm you need to destroy the joint, 
 which in turn releases the catapult arm and sets everything in motion.
+=======
+Next up you will be dynamically creating a spring joint whenever the player touches the catapult arm to initiate pulling back the catapult. It needs to be accessible to your class so that when the player lets go of the catapult arm you can destroy the joint, which in turn releases the catapult arm and sets everything in motion.
+>>>>>>> MakeSchool-Tutorials/master
 
 > [action]
 > Add this property to the *GameScene* class:

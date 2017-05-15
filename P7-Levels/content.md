@@ -13,9 +13,13 @@ duplicate code for each level. A SKScene can be can be loaded with any scene (.s
 file. So you can create mulitple .sks files and load any of them from the same SkScene 
 file *GameScene.swift* for example. 
 
+<<<<<<< HEAD
 *GameScene.swift* contains the game logic that runs the game. This file contains the 
 definition for a class named `GameScene`, which sublcasses `SKScene`. An `SKScene` can 
 be initialized with an .sks file via the init(fileNamed:) initializer. 
+=======
+This means you are not going to add the information about a level directly to your *GameScene.sks*. A better solution is to define an area in the *GameScene.sks* that is level specific and load the level data into that area.
+>>>>>>> MakeSchool-Tutorials/master
 
 Our strategy will be to create an .sks file for each level of the game. This will allow 
 you to create each scene (.sks file) in the visual editor. You will load each .sks file 
@@ -24,10 +28,14 @@ with the same `GameScene.swift`.
 *GameScene.swift* will keep the same name. For organization let's rename the game levels 
 as "Level_#.sks" where # will be the level number. For example:
 
+<<<<<<< HEAD
 - Level_1.sks
 - Level_2.sks
 - Level_3.sks
 - etc. 
+=======
+This node will be the container for the levels you will be loading later on. The actual loading mechanism will happen in code, you will need to create a code connection to make the **levelNode** accessible from the *GameScene* class.
+>>>>>>> MakeSchool-Tutorials/master
 
 # Level_1
 
@@ -75,7 +83,13 @@ Now you are going to add some simple level loading code. Previously we were load
 
 > [action]
 > Open *GameScene.swift*
+<<<<<<< HEAD
 > Add this new method: 
+=======
+> If you had any issue creating the `levelNode` code connection, here is a recap:
+>
+> Add this property to your class:
+>>>>>>> MakeSchool-Tutorials/master
 >
 ```
 /* Make a Class method to load levels */
@@ -110,11 +124,18 @@ guard let scene = GameScene(fileNamed: "GameScene") else {
 > like this:
 >
 ```
+<<<<<<< HEAD
 /* Load Game scene */
 guard let scene = GameScene.level(1) else {
     print("Could not load GameScene with level 1")
     return
 }
+=======
+/* Load Level 1 */
+let resourcePath = NSBundle.mainBundle().pathForResource("Level1", ofType: "sks")
+let newLevel = SKReferenceNode (URL: NSURL (fileURLWithPath: resourcePath!))
+levelNode.addChild(newLevel)
+>>>>>>> MakeSchool-Tutorials/master
 ```
 >
 
@@ -131,6 +152,7 @@ Now that you can shoot penguins, let's improve the experience by tracking the pe
 flight across the level. SpriteKit features a *SKCameraNode* that lets you view the 
 scene through this virtual camera. 
 
+<<<<<<< HEAD
 ## Add the camera
 
 A camera object gives us point of view through which we can view the scene. With a camera
@@ -140,6 +162,13 @@ of `SKNode`.
 > [action]
 > Add a camera to the scene. Open *Level_1.sks* add a camera node from the Object Library.
 > Set the position to `(0, 0)`, and the name to "cameraNode". 
+=======
+Oh no, you can't as the ice blocks don't have physics bodies.  SpriteKit lets you work on multiple nodes which makes this task even easier.
+
+> [action]
+> Open *Level1.sks*, hold *cmd* and *drag* a selection box across the scene.
+> To deselect the seals, you can then hold *shift* and click on the corner of each seal carefully.
+>>>>>>> MakeSchool-Tutorials/master
 >
 
 ![Add camera to the scene](../Tutorial-Images/p7-06-add-camera.png)
@@ -296,11 +325,18 @@ You will implement this much like we did for the **Main Menu** using the *MSButt
 class.  
 
 > [info]
+<<<<<<< HEAD
 > If you finding yourself needing to create button graphics, I made the *restart.png* 
 > with aptly titled [Da Button Factory](http://dabuttonfactory.com/)
 > If you find something even better, please share it.
 
 Add the restart button to the *GameScene.sks*
+=======
+> If you finding yourself needing to create button graphics, I made the *restart.png* with aptly titled [Da Button Factory](http://dabuttonfactory.com/).
+> If you find something even better, please share it.
+
+Let's add the restart button to the *GameScene*.
+>>>>>>> MakeSchool-Tutorials/master
 
 > [action]
 > Open *GameScene.sks* and drag the *restart.png* onto stage. I would recommend putting 

@@ -47,7 +47,12 @@ extension CGVector {
 > 
 
 > [action]
+<<<<<<< HEAD
 > Add the following code after the camera clamp in `func update(_ currentTime:)`
+=======
+> Add the following code after the camera clamp in `update(...)`
+>
+>>>>>>> MakeSchool-Tutorials/master
 ```
 /* Check penguin has come to rest */
 if cameraTarget.physicsBody?.joints.count == 0 && cameraTarget.physicsBody?.velocity.length() < 0.18 {
@@ -115,10 +120,14 @@ cameraNode.removeAllActions()
 
 ## Final tweak
 
+<<<<<<< HEAD
 Let's get rid of the red box static nodes, an easy way to hide them using the editor is 
 to modify the *Z-Position* to `-2` e.g. behind the background.  The visibility of a 
 physics node has no effect on the physics simulation. Otherways to achieve this could 
 be setting the sprite to have an *alpha* of `0` or set *hidden* to be `true`.
+=======
+Let's get rid of the red box static nodes, an easy way to hide them using the editor is to modify the *Z-Position* to `-2` e.g. behind the background.  The visibility of a physics node has no effect on the physics simulation. Other ways to achieve this could be setting the sprite to have an *alpha* of `0` or set *hidden* to be `true`.
+>>>>>>> MakeSchool-Tutorials/master
 
 # Summary
 

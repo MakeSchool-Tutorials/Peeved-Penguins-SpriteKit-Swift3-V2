@@ -1,6 +1,6 @@
 ---
 title: Building the game scene
-slug: gamescene
+slug: building-game-scene
 ---
 
 Now it's time to start working on the good stuff, you're going to 
@@ -19,6 +19,7 @@ construct *Penguin Launcher 0.1 Beta*
 
 ![add-background](../Tutorial-Images/p6-01-add-background.png)
 
+<<<<<<< HEAD
 > Drag *ground.png* onto the stage, snap to the bottom-left and set the 
 > *Z-Position* to `2`, you want the ground to be in the foreground as 
 > some objects such as the catapult will sit between the ground and the 
@@ -26,6 +27,11 @@ construct *Penguin Launcher 0.1 Beta*
 >
 
 ![add-background](../Tutorial-Images/p6-02-add-ground.png)
+=======
+> [action]
+> Open *GameScene.sks* and drag the *Bear.sks* from the *Project Navigator* and place it on top of the ground near the bottom-left.
+> You will most likely need to do a quick *Save* of the *GameScene* to have the bear sprite show up in the *SKReferenceNode*.
+>>>>>>> MakeSchool-Tutorials/master
 
 Remember the first game object you made? You will be adding the 
 animated *Bear.sks* to the scene. SpriteKit lets you reference **.sks** 
@@ -64,11 +70,22 @@ and bear.
 
 # Penguin launcher model 1
 
+<<<<<<< HEAD
 Before modeling catapult physics we are going to implement a simple 
 shooting mechanism to learn a bit more about projectile physics.
 
 Time for your to connect the catapult arm, spawn penguins and launch 
 them into the stratosphere.
+=======
+> [info]
+> SpriteKit doesn't include any handy vector maths libraries out of the box, thankfully the internet tends provide :]
+> There is a handy collection of helper classes and functions called [SKTUtils](https://github.com/raywenderlich/SKTUtils), we've updated these to Swift 2.1 so please [Download SKTUtils.zip](https://github.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift/raw/master/SKTUtils.zip), unzip it and drag into to your project.
+> Remember to check the import options as shown:
+> ![Copy if needed](../Tutorial-Images/xcode_copy_needed.png)
+>
+
+Time for you to connect the catapult arm, spawn penguins and launch them into the stratosphere.
+>>>>>>> MakeSchool-Tutorials/master
 
 > [action]
 > Open *GameScene.swift* and replace the contents with:
@@ -86,11 +103,18 @@ class GameScene: SKScene {
         catapultArm = childNode(withName: "catapultArm") as! SKSpriteNode
     }
 >    
+<<<<<<< HEAD
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // Make a Penguin
         let penguin = Penguin()
 >        
         // Add the penguin to this scene
+=======
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        /* Add a new penguin to the scene */
+        let resourcePath = NSBundle.mainBundle().pathForResource("Penguin", ofType: "sks")
+        let penguin = MSReferenceNode(URL: NSURL (fileURLWithPath: resourcePath!))
+>>>>>>> MakeSchool-Tutorials/master
         addChild(penguin)
 >        
         /* Move penguin to the catapult bucket area */
@@ -146,7 +170,7 @@ The ground will be a static (not dynamic) physics body.
 > ![GameScene basic preview](../Tutorial-Images/p6-071-ground-physics.png)
 >
 
-Run your game... It's a bit more fun, see how many penguins can you add ? :]
+Run your game... It's a bit more fun, see how many penguins you can add? :]
 
 ## Adding a little impulse
 
@@ -159,7 +183,12 @@ set the strength of the impulse on the x and y.
 >
 ```
 /* Impulse vector */
+<<<<<<< HEAD
 let launchImpulse = CGVector(dx: 200, dy: 0)
+=======
+let launchDirection = CGVector(dx: 1, dy: 0)
+let force = launchDirection * 10
+>>>>>>> MakeSchool-Tutorials/master
 >
 /* Apply impulse to penguin */
 penguin.physicsBody?.applyImpulse(launchImpulse)
@@ -175,8 +204,13 @@ First your setup the force vector with a direction `(200,0)` e.g X = 200 (Right)
 > ![Vector direction](../Tutorial-Images/vector_impulse.gif)
 >
 
+<<<<<<< HEAD
 Next you multiple this by `200` to ensure you hit the penguin with enough force to make 
 it really fly! Please feel free to play with these values.
+=======
+Next you multiply this by `10` to ensure you hit the penguin with enough force to make it fly!
+Please feel free to play with these values.
+>>>>>>> MakeSchool-Tutorials/master
 
 Run your game... Your penguins should hopefully fly across the screen now.
 
@@ -188,7 +222,7 @@ Your game is starting to come to life, you've learnt to:
 
 - Build a simple game scene
 - Construct a simple catapult
-- Dynamically adding new penguins to the scene
-- Applying impulse in a specific direction to launch the penguin
+- Dynamically add new penguins to the scene
+- Apply impulse in a specific direction to launch the penguin
 
 In the next chapter you will design your first game level.

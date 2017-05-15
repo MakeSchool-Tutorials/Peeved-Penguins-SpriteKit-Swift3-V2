@@ -23,8 +23,13 @@ arm that will then be animated.
 <!--  -->
 
 > [action]
+<<<<<<< HEAD
 > Resize the content of this view. Set the Height and width of the Bear scene to 
 > 80 x 80.
+=======
+> Select *Bear.sks* and `Zoom Out` the scene so you can see the yellow border.
+> Drag *bearnoarms.png* in from your *Media Library* to the scene, **snap** it to the bottom left corner of the scene.
+>>>>>>> MakeSchool-Tutorials/master
 >
 > ![Resize Bear](../Tutorial-Images/p3-02-resize-bear-scene.png)
 
@@ -41,6 +46,7 @@ Show the Media Library in the lower right by clicking the small Film icon.
 
 <!--  -->
 
+<<<<<<< HEAD
 > [info]
 > The Bear doesn't snap to the lower corner choose Editor > Snap to Nodes. 
 
@@ -49,21 +55,35 @@ Show the Media Library in the lower right by clicking the small Film icon.
 > [action]
 > Add *beararms.png* and set the *Anchor Point* to `(0,1)`, position it somewhere that 
 > looks sensible.
+=======
+> [action]
+> Add *beararm.png* and set the *Anchor Point* to `(0,1)`, position it somewhere that looks sensible.
+>>>>>>> MakeSchool-Tutorials/master
 > Set the *Z* to `1` to ensure the arm is always on top of the body.
 >
 > ![Adding the bear arm asset](../Tutorial-Images/p3-04-bear-arm-settings.png)
 
+<<<<<<< HEAD
 You need to set the anchor point of the arm because we are going to rotate it. When you 
 apply a rotation to a *SKNode* it will rotate around the anchor point - for the arm, this 
 should ideally be somewhere near the shoulder, which in this case is the top left corner 
 of the image.
+=======
+> [info]
+>If you are wondering why the yellow scene size border is different than yours, I like to set the scene size to fit nicely around the content, so in this case I would set the scene to be the same size as the *Bear*.
+> It doesn't really matter for the bear as it's static content.  However, it does for other objects like the penguin which I will discuss later.
+>>>>>>> MakeSchool-Tutorials/master
 
 # Adding animation
 
+<<<<<<< HEAD
 Now you can animate the polar bear's arm. In SpriteKit there is a default **Timeline** for 
 adding animation actions. However, you are going to use a more powerful feature and 
 create shared animations, which are stored in a *SpriteKit Action* file, this gives you 
 the power to reuse the custom animations your create with any node.
+=======
+Now you can animate the polar bear's arm. In SpriteKit there is a default **Timeline** for adding animation actions.  However, you are going to use a more powerful feature and create shared animations, which are stored in a *SpriteKit Action* file, this gives you the power to reuse the custom animations you create with any node.
+>>>>>>> MakeSchool-Tutorials/master
 
 > [action]
 > Open the timeline then click on *+* to add a new timeline and name it `ArmAnimation`, 

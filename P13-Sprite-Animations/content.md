@@ -67,17 +67,25 @@ the catapult:
 
 ![Penguin animation](../Tutorial-Images/animated_penguins.gif)
 
+<<<<<<< HEAD
 # Unsynchronize the animations
 
 The animation looks pretty good. However, it seems unnatural that all three penguins 
 perform the `JumpAction` at the exact same time. This happens because our timeline 
 actions all start at zero, this means the animation starts as soon as the object enters 
 the scene.
+=======
+#Desynchronize the animations
+>>>>>>> MakeSchool-Tutorials/master
 
 You improve this quite easily, click on each *JumpAction* in the timeline and modify 
 the *Start Timer*, set it to `0` , `0.25` and `0.5` respectivley.
 
+<<<<<<< HEAD
 ![Offset animation](../Tutorial-Images/p12-10-offset-animations.png)
+=======
+You improve this quite easily, click on each *JumpAction* in the timeline and modify the *Start Timer*, set it to `0` , `0.25` and `0.5` respectively.
+>>>>>>> MakeSchool-Tutorials/master
 
 Run your game...
 
