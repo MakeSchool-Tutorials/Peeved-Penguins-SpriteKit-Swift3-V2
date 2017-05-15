@@ -254,8 +254,7 @@ print("Seal Hit")
 ```
 /* Was the collision more than a gentle nudge? */
 if contact.collisionImpulse > 2.0 {
->
-    /* Kill Seal(s) */
+    /* Kill Seal */
     if contactA.categoryBitMask == 2 { dieSeal(node: nodeA) }
     if contactB.categoryBitMask == 2 { dieSeal(node: nodeB) }
 }
