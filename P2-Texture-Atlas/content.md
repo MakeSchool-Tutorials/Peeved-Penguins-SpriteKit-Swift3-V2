@@ -40,19 +40,19 @@ The unpacked folder should be named `assets.atlas` the key here is the extension
 > `Assets.xcassets` this gives us great control over the assets however it is inefficient 
 > when it comes to game rendering performance.
 >
-> Imagine opening up your preferred image editing software and copy/pasting all of these 
-> single images into one larger image to hold them all. The immediate benefit would be 
+> Imagine combining all of these 
+> images into one larger image sometimes called a 
+> [spritesheet](https://www.google.com/#safe=off&q=sprite+sheet). The immediate benefit would be 
 > instead of the app having to load in approx 25 png files it now only has to load one.  
-> On today's devices this is a relatively small win. However, only a few iPhone 
-> generations ago this alone could give a nice little improvement to the loading time. 
-> Every second counts when it comes to holding your players attention.
+> While this is a small win, accessing pixels from a single image is more effecient than 
+> doing the same from 25 different files.
 >
 > The bigger benefit is realized during the rendering of the  game scene. Every time 
 > (ideally 60 times per second) your *Assets* (or *Sprites*) need to be displayed on 
 > screen, the rendering engine must go to texture memory where the sprite is stored and 
 > render this into the frame buffer.  There is a performance cost to switching textures, 
 > this can be negated by the use of the *Texture Atlas*, instead of having to switch 
-> textures 25 times, 60 times a second.  The rendering engine can now render 25 different 
+> textures 25 times, 60 times a second. The rendering engine can now render 25 different 
 > sections from *one* texture to render the scene and improve performance! You will find 
 > a *Texture Atlas* may also be referred to as a *Sprite Sheet*.
 
