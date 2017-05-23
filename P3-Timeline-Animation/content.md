@@ -76,14 +76,7 @@ of the image.
 
 # Adding animation
 
-<<<<<<< HEAD
-Now you can animate the polar bear's arm. In SpriteKit there is a default **Timeline** for 
-adding animation actions. However, you are going to use a more powerful feature and 
-create shared animations, which are stored in a *SpriteKit Action* file, this gives you 
-the power to reuse the custom animations your create with any node.
-=======
 Now you can animate the polar bear's arm. In SpriteKit there is a default **Timeline** for adding animation actions.  However, you are going to use a more powerful feature and create shared animations, which are stored in a *SpriteKit Action* file, this gives you the power to reuse the custom animations you create with any node.
->>>>>>> MakeSchool-Tutorials/master
 
 > [action]
 > Open the timeline then click on *+* to add a new timeline and name it `ArmAnimation`, 
