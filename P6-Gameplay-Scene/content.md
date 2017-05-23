@@ -74,18 +74,8 @@ and bear.
 Before modeling catapult physics we are going to implement a simple 
 shooting mechanism to learn a bit more about projectile physics.
 
-Time for your to connect the catapult arm, spawn penguins and launch 
+Time for you to connect the catapult arm, spawn penguins and launch 
 them into the stratosphere.
-=======
-> [info]
-> SpriteKit doesn't include any handy vector maths libraries out of the box, thankfully the internet tends provide :]
-> There is a handy collection of helper classes and functions called [SKTUtils](https://github.com/raywenderlich/SKTUtils), we've updated these to Swift 2.1 so please [Download SKTUtils.zip](https://github.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift/raw/master/SKTUtils.zip), unzip it and drag into to your project.
-> Remember to check the import options as shown:
-> ![Copy if needed](../Tutorial-Images/xcode_copy_needed.png)
->
-
-Time for you to connect the catapult arm, spawn penguins and launch them into the stratosphere.
->>>>>>> MakeSchool-Tutorials/master
 
 > [action]
 > Open *GameScene.swift* and replace the contents with:
@@ -144,13 +134,13 @@ Great, the penguin spawns at the catapult, but sadly it falls out of the game wo
 Let's enable physics on the **ground** this will give the penguins a surface to 
 bounce on. 
 
-The ground could be used as to determine a physics body. The shape of the image is not a 
+We need a physics body for the ground. The shape of the image is not a 
 rectangle making it a poor choice. It's best for us to use circles and rectangles for 
-physics bodies whenever possible. THe circle is the most effecient shape followed by the 
+physics bodies whenever possible. The circle is the most effecient shape followed by the 
 rectangle. 
 
-For best results you will draw a color sprite in where the ground should be. You can 
-later set the color to a transparent color. 
+Draw a color sprite over the ground. You can make a rectangular physics body from this. Later you can
+set the color to a transparent color. 
 
 The ground will be a static (not dynamic) physics body. 
 
