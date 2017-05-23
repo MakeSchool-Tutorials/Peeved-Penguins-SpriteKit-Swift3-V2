@@ -49,7 +49,8 @@ class Penguin: SKSpriteNode {
     }
 }
 ```
-> You will also want to be alerted when the seal is involved in a collision with the penguin so you set the *Contact Mask* to `1`.
+> You will also want to be alerted when the seal is involved in a collision with the penguin so you set the *Contact Mask* 
+> to `1`.
 >
 
 Here you made a new Swift file, and defined a class named: Penguin. The Peguin class
