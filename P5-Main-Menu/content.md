@@ -136,9 +136,9 @@ if let scene = MainMenu(fileNamed: "MainMenu") {
 ```
 
 The `viewDidLoad()` method in `GameViewController` is called when this view controller 
-appears on the screen, at which time we load the first scene: MainMenu. 
+appears on the screen, at which time we load the first scene: `MainMenu`. 
 
-Here you created an instance of MainMenu.swift which is an SKScene. When loading a Scene 
+Here you created an instance of *MainMenu.swift* which is an `SKScene`. When loading a Scene 
 you can also load it with a sks file using `SKScene(fileNamed:)`. In this case you used: 
 `MainMenu(fileNamed: "MainMenu")` to create an instance of MainMenu (from MainMenu.swift)
 with the `MainMenu.sks` scene. 
