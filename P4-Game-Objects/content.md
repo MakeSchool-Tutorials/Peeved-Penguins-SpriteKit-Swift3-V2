@@ -49,8 +49,6 @@ class Penguin: SKSpriteNode {
     }
 }
 ```
-> You will also want to be alerted when the seal is involved in a collision with the penguin so you set the *Contact Mask* 
-> to `1`.
 >
 
 Here you made a new Swift file, and defined a class named: Penguin. The Peguin class
@@ -64,7 +62,7 @@ Penguin will interact with other object in the simulation.
 # Summary
 
 Here you defined a class from which you can generate Penguin objects. The Penguin
-is a subclass of SKSpriteNode. Sprite Nodes are a common component of sprite kit. 
+is a subclass of `SKSpriteNode`. Sprite Nodes are a common component of sprite kit. 
 Sprites are game objects that you see on the screen. They have properties of: 
 texture, color, size, and physicsBody.  
 
