@@ -167,10 +167,10 @@ buttonPlay.selectedHandler = {
 ```
 >
 > The button's `selectHandler` is a code block that runs when the button tapped. 
-> The code in this block gets a reference to the view (1), we use guard here since `view`
-> is an optional. Next load the `GameScene` class with *GameScene.sks* (2). This step also returns 
+> The code in this block gets a reference to the view **(1)**, we use guard here since `view`
+> is an optional. Next load the `GameScene` class with *GameScene.sks* **(2)**. This step also returns 
 > an optional so again we use `guard`. If all of that worked you set some options on the new scene
-> (3). Last show the scene by calling `presentScene()` (4).
+> **(3)**. Last show the scene by calling `presentScene()` **(4)**.
 > 
 
 Run the project...
