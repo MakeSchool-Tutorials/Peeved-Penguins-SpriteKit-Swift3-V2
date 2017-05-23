@@ -19,7 +19,6 @@ construct *Penguin Launcher 0.1 Beta*
 
 ![add-background](../Tutorial-Images/p6-01-add-background.png)
 
-<<<<<<< HEAD
 > Drag *ground.png* onto the stage, snap to the bottom-left and set the 
 > *Z-Position* to `2`, you want the ground to be in the foreground as 
 > some objects such as the catapult will sit between the ground and the 
@@ -27,16 +26,6 @@ construct *Penguin Launcher 0.1 Beta*
 >
 
 ![add-background](../Tutorial-Images/p6-02-add-ground.png)
-=======
-> [action]
-> Open *GameScene.sks* and drag the *Bear.sks* from the *Project Navigator* and place it on top of the ground near the bottom-left.
-> You will most likely need to do a quick *Save* of the *GameScene* to have the bear sprite show up in the *SKReferenceNode*.
->>>>>>> MakeSchool-Tutorials/master
-
-Remember the first game object you made? You will be adding the 
-animated *Bear.sks* to the scene. SpriteKit lets you reference **.sks** 
-files in other **.sks** files using a *SKReferenceNode*. This is a 
-**super powerful** feature, and you will make extensive use of it.
 
 > [action]
 > Open *GameScene.sks* and drag the *Bear.sks* from the *Project 
