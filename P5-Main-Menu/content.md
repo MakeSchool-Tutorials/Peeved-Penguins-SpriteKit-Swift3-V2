@@ -3,8 +3,8 @@ title: Adding the main menu
 slug: main-menu
 ---
 
-Now you are going to setup the essential main menu screen. That start menu will then lead 
-the player into the gameplay scene that you will develop in the next chapter.
+Now you are going to setup a main menu screen. This start menu will then lead 
+the player into the game play scene that you will develop in the next chapter.
 
 The scene will be made of two parts:
 
