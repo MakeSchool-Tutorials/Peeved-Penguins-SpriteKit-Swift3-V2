@@ -76,9 +76,6 @@ import SpriteKit
 >
 class MainMenu: SKScene {
 >    
-    /* UI Connections */
-    var buttonPlay: MSButtonNode!
->    
     override func didMove(to view: SKView) {
         /* Setup your scene here */
 >      
@@ -123,6 +120,58 @@ If the Simulator shows your game in portrait choose Hardware > Rotate Right
 
 Looks good, you can even touch the button. However, it doesn't do anything other than 
 print: "No button action set".
+
+## Load the Game Scene
+
+> [action]
+> Add a reference to the play button at the top of the `MainMenu` class.
+> 
+```
+/* UI Connections */
+var buttonPlay: MSButtonNode!
+```
+>
+> Now set the reference to the button and give it an action when touched. Add the 
+> following inside `didMove(to view:)`:
+> 
+```
+/* Set UI connections */
+buttonPlay = self.childNode(withName: "buttonPlay") as! MSButtonNode
+>
+/* Setup restart button selection handler */
+buttonPlay.selectedHandler = {
+>    
+    /* 1) Grab reference to our SpriteKit view */
+    guard let skView = self.view as SKView! else {
+        print("Could not get Skview")
+        return
+    }
+>    
+    /* 2) Load Game scene */
+    guard let scene = GameScene(fileNamed:"GameScene") else {
+        print("Could not make GameScene, check the name is spelled correctly")
+        return
+    }
+>    
+    /* 3) Ensure correct aspect mode */
+    scene.scaleMode = .aspectFill
+>   
+    /* Show debug */
+    skView.showsPhysics = true
+    skView.showsDrawCount = true
+    skView.showsFPS = true
+>    
+    /* 4) Start game scene */
+    skView.presentScene(scene)
+}
+```
+>
+> The button's `selectHandler` is a code block that runs when the button tapped. 
+> The code in this block gets a reference to the view (1), we use guard here since `view`
+> is an optional. Next load the `GameScene` class with *GameScene.sks* (2). This step also returns 
+> an optional so again we use `guard`. If all of that worked you set some options on the new scene
+> (3). Last show the scene by calling `presentScene()` (4).
+> 
 
 Run the project...
 
