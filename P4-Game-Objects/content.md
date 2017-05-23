@@ -7,7 +7,7 @@ slug: penguins-seals
 
 In this lesson you will create some game objects that will be used 
 by your game. Here you will create classes that generate instances
-of these objects and configured for the game. 
+of these objects configured for the game to use. 
 
 # Penguin
 
