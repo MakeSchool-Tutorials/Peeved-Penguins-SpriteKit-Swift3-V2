@@ -14,11 +14,9 @@ Let's get started with a new SpriteKit project and look at the benefits of using
 > ![Xcode new project](../Tutorial-Images/p2-01-make-new-project.png)
 >
 
-<<<<<<< HEAD
 ## Landscape
-=======
+
 Now download the [Peeved Penguins art pack](https://github.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift/raw/master/PeevedPenguinsAssets.zip) we created for you. Once the download is complete, unpack the folder.
->>>>>>> MakeSchool-Tutorials/master
 
 This game will use the landscape device orientation, you need to set this in the project 
 otherwise it will default to portrait.
