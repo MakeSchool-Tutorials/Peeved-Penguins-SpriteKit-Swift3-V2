@@ -84,7 +84,7 @@ arm by `90` degrees and the second will *rotate* it back by `90` degrees.
 > action in the *Object library*.
 > Drag this into the timeline, the default values of *Duration* `1` and *Degrees* `90` 
 > works well.
-> Drag another rotation in and set the *Degrees* to `-90`
+> Drag another rotation in and set the *Duration* to `1` and the *Degrees* to `-90`
 >
 > ![Define the arm animation actions](../Tutorial-Images/p3-08-add-rotation.png)
 >
