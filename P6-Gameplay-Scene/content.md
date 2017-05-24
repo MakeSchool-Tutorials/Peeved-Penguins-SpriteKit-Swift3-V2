@@ -120,10 +120,14 @@ rectangle making it a poor choice. It's best for us to use circles and rectangle
 physics bodies whenever possible. The circle is the most effecient shape followed by the 
 rectangle. 
 
-Draw a color sprite over the ground. You can make a rectangular physics body from this. Later you can
-set the color to a transparent color. 
+Draw a color sprite over the ground. Make a rectangular physics body from this. Uncheck: 
 
-The ground will be a static (not dynamic) physics body. 
+- Dynamic 
+- Affected Gravity
+- Allows Rotation
+
+Set the color of the sprite to something semitransparent. This will be good for testing. Later 
+you can make the color fully transparent. 
 
 > [solution]
 > Open `GameScene.sks`. Drag 'Color Sprite' into the scene. Set the 'z-position' to 2. 
