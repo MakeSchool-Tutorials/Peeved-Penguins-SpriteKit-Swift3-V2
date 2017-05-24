@@ -97,7 +97,7 @@ loads we look for the node with the name "buttonPlay" and assign it to the var.
 # Launching the Main Scene
 
 By default a new game project will load the *GameScene*, you need to change this to 
-load *MainMenu* instead. The entry point or your game is `GameViewController.swift`. 
+load *MainMenu* instead. The entry point for your game is `GameViewController.swift`. 
 
 > [action]
 > Open *GameViewController.swift* and modify the following line inside `viewDidLoad()`:
@@ -132,7 +132,7 @@ print: "No button action set".
 
 > [action]
 > Add an action to handle when button is tapped touched. Add the 
-> following inside `didMove(to view:)`:
+> following inside `didMove(to view:)` below `buttonPlay = ...`:
 > 
 ```
 /* Setup restart button selection handler */
