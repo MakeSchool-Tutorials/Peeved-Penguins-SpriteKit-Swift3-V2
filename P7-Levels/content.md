@@ -9,33 +9,25 @@ Time to design the first level.
 # Level loading mechanism
 
 You want to be able to create any number of different levels without having to create
-duplicate code for each level. A SKScene can be can be loaded with any scene (.sks) 
-file. So you can create mulitple .sks files and load any of them from the same SkScene 
-file *GameScene.swift* for example. 
+duplicate code for each level. A SKScene (.swift file) object can be can be loaded with any scene (.sks) 
+file. This allows you to create mulitple .sks files and load any of them with the same SkScene 
+object. *GameScene.swift* for example could be instantiated with Level_1.sks or Level_2.sks. 
 
-<<<<<<< HEAD
 *GameScene.swift* contains the game logic that runs the game. This file contains the 
 definition for a class named `GameScene`, which sublcasses `SKScene`. An `SKScene` can 
 be initialized with an .sks file via the init(fileNamed:) initializer. 
-=======
-This means you are not going to add the information about a level directly to your *GameScene.sks*. A better solution is to define an area in the *GameScene.sks* that is level specific and load the level data into that area.
->>>>>>> MakeSchool-Tutorials/master
 
 Our strategy will be to create an .sks file for each level of the game. This will allow 
-you to create each scene (.sks file) in the visual editor. You will load each .sks file 
+you to create each scene level (.sks file) in the visual editor. You will load each level.sks file 
 with the same `GameScene.swift`. 
 
-*GameScene.swift* will keep the same name. For organization let's rename the game levels 
+*GameScene.swift* will keep the same name, for organization let's rename the game levels 
 as "Level_#.sks" where # will be the level number. For example:
 
-<<<<<<< HEAD
 - Level_1.sks
 - Level_2.sks
 - Level_3.sks
 - etc. 
-=======
-This node will be the container for the levels you will be loading later on. The actual loading mechanism will happen in code, you will need to create a code connection to make the **levelNode** accessible from the *GameScene* class.
->>>>>>> MakeSchool-Tutorials/master
 
 # Level_1
 
@@ -44,7 +36,7 @@ This node will be the container for the levels you will be loading later on. The
 >
 
 You will use this file as the template for all of your other levels. You will set this 
-level up and tets with it. Later you can duplicate this file to easily make new levels. 
+level up and test with it. Later you can duplicate this file to easily make new levels. 
 
 # Designing a level
 
@@ -52,7 +44,7 @@ The level is made from the default elements: ground, catapult, bear, and level s
 elements: Ice Blocks, and Seals. You'll make the your first level by adding Ice Blocks
 and Seals. 
 
-The Ice Blocks and Seals need to be Physics objects you'll be setting those options. 
+The Ice Blocks and Seals need to be Physics objects you'll need to set those options. 
 After creating the first Ice Block or Seal you can copy it to create another with the 
 same settings.
 
