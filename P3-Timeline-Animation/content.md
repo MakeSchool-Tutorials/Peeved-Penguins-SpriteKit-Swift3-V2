@@ -60,11 +60,13 @@ Now you can animate the polar bear's arm. In SpriteKit there is a default **Time
 > [action]
 > Open the timeline then click on *+* to add a new timeline and name it `ArmAnimation`, 
 > when prompted to create a new file name it `CharacterActions`.
+>
 > ![Adding the character action file](../Tutorial-Images/p3-05-timeline.png)
 >
 > ![Create ArmAnimation action](../Tutorial-Images/p3-06-create-action.png)
 > 
 > ![CharacterAction](../Tutorial-Images/p3-07-character-actions.png)
+>
 
 ## Adding actions to the timeline
 
