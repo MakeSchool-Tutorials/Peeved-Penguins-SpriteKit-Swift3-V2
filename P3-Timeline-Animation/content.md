@@ -49,8 +49,7 @@ Show the Media Library in the lower right by clicking the small Film icon.
 >
 > ![Adding the bear arm asset](../Tutorial-Images/p3-04-bear-arm-settings.png)
 
-You need to set the anchor point of the arm because we are going to rotate it. When you 
-apply rotation to a *SKNode* it will rotate around the anchor point - for the arm, this 
+When you apply rotation to a *SKNode* it will rotate around the anchor point - for the arm, this 
 should ideally be somewhere near the shoulder, which in this case is the top left corner 
 of the image.
 
