@@ -131,43 +131,52 @@ print: "No button action set".
 ## Load the Game Scene
 
 > [action]
-> Back in *MainMenu.swift* add an action to handle when button is tapped touched. Add the 
-> following inside `didMove(to view:)` below `buttonPlay = ...`:
+> Back in *MainMenu.swift* add a function to load the gameScene. Make to add the function below inside 
+> the `MainMenu` class. 
 > 
 ```
-/* Setup restart button selection handler */
-buttonPlay.selectedHandler = {
->    
+func loadGame() {
     /* 1) Grab reference to our SpriteKit view */
     guard let skView = self.view as SKView! else {
         print("Could not get Skview")
         return
     }
->    
+>        
     /* 2) Load Game scene */
     guard let scene = GameScene(fileNamed:"GameScene") else {
         print("Could not make GameScene, check the name is spelled correctly")
         return
     }
->    
+>        
     /* 3) Ensure correct aspect mode */
     scene.scaleMode = .aspectFill
->   
+>        
     /* Show debug */
     skView.showsPhysics = true
     skView.showsDrawCount = true
     skView.showsFPS = true
->    
+>        
     /* 4) Start game scene */
     skView.presentScene(scene)
 }
 ```
 >
-> The button's `selectHandler` is a code block that runs when the button tapped. 
 > The code in this block gets a reference to the view **(1)**, we use guard here since `view`
 > is an optional. Next load the `GameScene` class with *GameScene.sks* **(2)**. This step also returns 
 > an optional so again we use `guard`. If all of that worked you set some options on the new scene
 > **(3)**. Last show the scene by calling `presentScene()` **(4)**.
+>
+> Next add block of code for the button to run when tapped. Add the following after `buttonPlay = ...` in 
+> `didMove(to view:)`:
+>
+```
+buttonPlay.selectedHandler = {
+    loadGame()
+}
+```
+>
+> The button's `selectHandler` is a code block that runs when the button tapped. In this case you are calling 
+> the `loadGame()` function you wrote in the previous step. 
 > 
 
 Run the project...
