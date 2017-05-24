@@ -20,14 +20,9 @@ The bear will have it's own `.sks` file.
 You need to combine two images to make the bear, the body without an arm and a separate 
 arm that will then be animated.
 
-<!--  -->
-
 > [action]
 > Resize the content of this view. Set the Height and width of the Bear scene to 
 > 80 x 80.
->
-> Select *Bear.sks* and Zoom Out so you can see the yellow border.
-> Drag *bearnoarms.png* in from your *Media Library* to the scene, **snap** it to the bottom left corner of the scene.
 >
 > ![Resize Bear](../Tutorial-Images/p3-02-resize-bear-scene.png)
 >
