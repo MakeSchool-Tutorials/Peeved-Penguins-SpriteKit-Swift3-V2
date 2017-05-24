@@ -171,7 +171,7 @@ func loadGame() {
 >
 ```
 buttonPlay.selectedHandler = {
-    loadGame()
+    self.loadGame()
 }
 ```
 >
