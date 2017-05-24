@@ -130,8 +130,6 @@ Make a rectangular physics body from this. Uncheck:
 - Affected Gravity
 - Allows Rotation
 
-
-
 > [solution]
 > Open `GameScene.sks`. Drag 'Color Sprite' into the scene. Set the 'z-position' to 2. 
 > Then resize the Color Sprite to fit over thhe ground. Last, set the color to something 
@@ -157,16 +155,11 @@ hit by an invisible baseball bat. An impulse is a one time push on a vector. You
 set the strength of the impulse on the x and y. 
 
 > [action]
-> In *GameScene.swift* add the following to the end of the `touchesBegan(...)` method:
+> In *GameScene.swift* add the following to the end of the `touchesBegan(_ touches:)` method:
 >
 ```
 /* Impulse vector */
-<<<<<<< HEAD
 let launchImpulse = CGVector(dx: 200, dy: 0)
-=======
-let launchDirection = CGVector(dx: 1, dy: 0)
-let force = launchDirection * 10
->>>>>>> MakeSchool-Tutorials/master
 >
 /* Apply impulse to penguin */
 penguin.physicsBody?.applyImpulse(launchImpulse)
@@ -182,21 +175,13 @@ First your setup the force vector with a direction `(200,0)` e.g X = 200 (Right)
 > ![Vector direction](../Tutorial-Images/vector_impulse.gif)
 >
 
-<<<<<<< HEAD
-Next you multiple this by `200` to ensure you hit the penguin with enough force to make 
-it really fly! Please feel free to play with these values.
-=======
-Next you multiply this by `10` to ensure you hit the penguin with enough force to make it fly!
-Please feel free to play with these values.
->>>>>>> MakeSchool-Tutorials/master
-
 Run your game... Your penguins should hopefully fly across the screen now.
 
 ![Animated penguin launcher](../Tutorial-Images/p6-08-launch-penguin.gif)
 
 # Summary
 
-Your game is starting to come to life, you've learnt to:
+Your game is starting to come to life, you've learned to:
 
 - Build a simple game scene
 - Construct a simple catapult
