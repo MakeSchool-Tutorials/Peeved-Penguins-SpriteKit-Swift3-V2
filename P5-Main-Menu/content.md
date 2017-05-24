@@ -67,9 +67,10 @@ Let's add a new *MainMenu.Swift* file to facilitate functionality for
 > [action]
 > Create a new empty Swift file (`File > New > File > Swift File`) and name it 
 > `MainMenu.swift`
-> Ensure your new class reads as follows
 >
 > ![Add MainMenu.swift](../Tutorial-Images/p5-05-mainmenu-swift.png)
+>
+> Ensure your new class reads as follows
 >
 ```
 import SpriteKit
