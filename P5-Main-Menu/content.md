@@ -70,7 +70,7 @@ Let's add a new *MainMenu.Swift* file to facilitate functionality for
 >
 > ![Add MainMenu.swift](../Tutorial-Images/p5-05-mainmenu-swift.png)
 >
-> Ensure your new class reads as follows
+> Ensure your new class reads as follows. Add the following to *MainScene.swift*:
 >
 ```
 import SpriteKit
