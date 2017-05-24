@@ -166,13 +166,13 @@ penguin.physicsBody?.applyImpulse(launchImpulse)
 ```
 >
 
-First your setup the force vector with a direction `(200,0)` e.g X = 200 (Right)
+First your setup the force vector with a direction `(200,0)` e.g X = 200 (Right) and y = 0 (not up or down).
 
 > [info]
 > If you need a little recap on vectors, this diagram illustrates the direction of the 
 > vector `(400,0)`
 >
-> ![Vector direction](../Tutorial-Images/vector_impulse.gif)
+> ![Vector direction](../Tutorial-Images/CGVector.png)
 >
 
 Run your game... Your penguins should hopefully fly across the screen now.
