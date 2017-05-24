@@ -76,17 +76,23 @@ Let's add a new *MainMenu.Swift* file to facilitate functionality for
 import SpriteKit
 >
 class MainMenu: SKScene {
+>
+/* UI Connections */
+var buttonPlay: MSButtonNode!
 >    
     override func didMove(to view: SKView) {
         /* Setup your scene here */
+>
+        /* Set UI connections */
+        buttonPlay = self.childNode(withName: "buttonPlay") as! MSButtonNode
 >      
     }
 }
 ```
 >
 
-This code creates the code connection for the button and sets up the *selectedHandler* 
-to launch your *GameScene* when the button is touched.
+This defines the class for this scene. It also defines a var to hold a reference to the button node. When the scene 
+loads we look for the node with the name "buttonPlay" and assign it to the var. 
 
 # Launching the Main Scene
 
@@ -125,20 +131,10 @@ print: "No button action set".
 ## Load the Game Scene
 
 > [action]
-> Add a reference to the play button at the top of the `MainMenu` class.
-> 
-```
-/* UI Connections */
-var buttonPlay: MSButtonNode!
-```
->
-> Now set the reference to the button and give it an action when touched. Add the 
+> Add an action to handle when button is tapped touched. Add the 
 > following inside `didMove(to view:)`:
 > 
 ```
-/* Set UI connections */
-buttonPlay = self.childNode(withName: "buttonPlay") as! MSButtonNode
->
 /* Setup restart button selection handler */
 buttonPlay.selectedHandler = {
 >    
