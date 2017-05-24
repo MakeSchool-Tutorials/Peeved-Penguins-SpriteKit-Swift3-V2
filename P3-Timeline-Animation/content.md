@@ -77,12 +77,10 @@ Now you can animate the polar bear's arm. In SpriteKit there is a default **Time
 ## Adding actions to the timeline
 
 You will be animating the arm using two rotation actions, the first one will *rotate* the 
-arm by `90` degrees and the second will *rotate* it back by `90` degrees. Unfortunately 
-SpriteKit doesn't allow you to easily preview this animation when building shared 
-**timeline** actions.
+arm by `90` degrees and the second will *rotate* it back by `90` degrees. 
 
 > [action]
-> You should be in *CharacterActions.sks*, expand *ArmAnimation* and locate the *Rotate* 
+> You should be in *CharacterActions.sks*, expand *ArmAnimation* and locate the *Rotate*
 > action in the *Object library*.
 > Drag this into the timeline, the default values of *Duration* `1` and *Degrees* `90` 
 > works well.
