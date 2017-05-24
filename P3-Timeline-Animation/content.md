@@ -26,7 +26,7 @@ arm that will then be animated.
 > Resize the content of this view. Set the Height and width of the Bear scene to 
 > 80 x 80.
 >
-> Select *Bear.sks* and `Zoom Out` the scene so you can see the yellow border.
+> Select *Bear.sks* and Zoom Out so you can see the yellow border.
 > Drag *bearnoarms.png* in from your *Media Library* to the scene, **snap** it to the bottom left corner of the scene.
 >
 > ![Resize Bear](../Tutorial-Images/p3-02-resize-bear-scene.png)
