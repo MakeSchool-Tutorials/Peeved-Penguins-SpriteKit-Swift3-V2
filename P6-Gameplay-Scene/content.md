@@ -59,7 +59,6 @@ and bear.
 
 # Penguin launcher model 1
 
-<<<<<<< HEAD
 Before modeling catapult physics we are going to implement a simple 
 shooting mechanism to learn a bit more about projectile physics.
 
@@ -71,7 +70,7 @@ them into the stratosphere.
 >
 ```
 import SpriteKit
->
+
 class GameScene: SKScene {
 >    
     /* Game object connections */
@@ -82,25 +81,18 @@ class GameScene: SKScene {
         catapultArm = childNode(withName: "catapultArm") as! SKSpriteNode
     }
 >    
-<<<<<<< HEAD
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         // Make a Penguin
         let penguin = Penguin()
 >        
         // Add the penguin to this scene
-=======
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        /* Add a new penguin to the scene */
-        let resourcePath = NSBundle.mainBundle().pathForResource("Penguin", ofType: "sks")
-        let penguin = MSReferenceNode(URL: NSURL (fileURLWithPath: resourcePath!))
->>>>>>> MakeSchool-Tutorials/master
         addChild(penguin)
->        
+>
         /* Move penguin to the catapult bucket area */
         penguin.position.x = catapultArm.position.x + 32
         penguin.position.y = catapultArm.position.y + 50
     }
->    
+>        
     override func update(_ currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
     }
