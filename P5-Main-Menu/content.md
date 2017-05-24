@@ -131,7 +131,7 @@ print: "No button action set".
 ## Load the Game Scene
 
 > [action]
-> Add an action to handle when button is tapped touched. Add the 
+> Back in *MainMenu.swift* add an action to handle when button is tapped touched. Add the 
 > following inside `didMove(to view:)` below `buttonPlay = ...`:
 > 
 ```
