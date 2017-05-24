@@ -69,6 +69,8 @@ Now you can animate the polar bear's arm. In SpriteKit there is a default **Time
 >
 > ![Create ArmAnimation action](../Tutorial-Images/p3-06-create-action.png)
 > 
+> Last save the new actions. 
+>
 > ![CharacterAction](../Tutorial-Images/p3-07-character-actions.png)
 >
 
