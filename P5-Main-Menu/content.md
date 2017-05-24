@@ -8,8 +8,8 @@ the player into the game play scene that you will develop in the next chapter.
 
 The scene will be made of two parts:
 
-1. MainMenu.swift - contains all of the code that controls the scene.
-2. MainMenu.sks - is a visual editor that that holds all of the objects in the scene.
+1. *MainMenu.swift* - contains all of the code that controls the scene.
+2. *MainMenu.sks* - is a visual editor that that holds all of the objects in the scene.
 
 # Adding the Main Scene
 
