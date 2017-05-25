@@ -31,7 +31,7 @@ Our game needs collisions between Penguins, Ice Blocks, Ground, Seals, and Catap
 
 # The Physics contact delegate
 
-In the course of playing contactc between some of the objects is meaningful. For example
+In the course of playing contact between some of the objects is meaningful. For example
 when an Ice Block or a Penguin hits a Seal we want to know. If the collision is hard
 enough we want to remove the Seal. 
 
