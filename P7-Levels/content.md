@@ -51,12 +51,12 @@ same settings.
 > [action] 
 > Design your own level by dragging Ice Blocks and Seals into the scene. 
 > 
-> For Seals, choose Physics Body: "Bounding Circle", Category Mask: 2, Contact Mask: 1.
+> For *Seals*, choose Physics Body: "Bounding Circle", Category Mask: 2, Contact Mask: 1.
+>
+> For *Ice Blocks*, choose Physics Body: "Bounding Rectangle". Leave the other options at 
+> the default values. 
 > 
 > ![Ice Blocks](../Tutorial-Images/p7-04-seal.png)
->
-> For Ice Blocks, choose Physics Body: "Bounding Rectangle". Leave the other options at 
-> the default values. 
 >
 > Be sure to place some blocks inside the frame on the right. The camera doesn't move yet 
 > so anything outside the frame will not be visible, for now. 
@@ -64,24 +64,18 @@ same settings.
 > ![Ice Blocks](../Tutorial-Images/p7-05-ice-block.png)
 > 
 
-Testing at this point will produce no results! Fear not and read on...
+Testing at this point will produce *no results!* Fear not and read on...
 
 # Level loading code
 
-Now you are going to add some simple level loading code. Previously we were loading
+You need to add a function that will load any level. Previously we were loading
 'GameScene.sks'. You've renamed that file to 'Level_1.sks'. You need to set up 
-`GameScene.swift` to load the new scene. You will set it up to load any file named:
-'Level_#' where # could be any number.
+`GameScene.swift` to load the renamed scene, or any scene named 'Level_#' where # 
+is any integer.
 
 > [action]
 > Open *GameScene.swift*
-<<<<<<< HEAD
 > Add this new method: 
-=======
-> If you had any issue creating the `levelNode` code connection, here is a recap:
->
-> Add this property to your class:
->>>>>>> MakeSchool-Tutorials/master
 >
 ```
 /* Make a Class method to load levels */
@@ -101,9 +95,10 @@ Now load the Level 1.
 
 > [action]
 > You need to modify code you used to load `GameScene`. Find the block of code
-> below in `MainMenu.swift` inside didMove(to view:) method. 
+> below in *MainMenu.swift* inside `loadScene()` method. 
 >
 ```
+/* 2) Load Game scene */
 guard let scene = GameScene(fileNamed: "GameScene") else {
     print("Could not make GameScene, check the name is spelled correctly")
     return
@@ -116,18 +111,11 @@ guard let scene = GameScene(fileNamed: "GameScene") else {
 > like this:
 >
 ```
-<<<<<<< HEAD
 /* Load Game scene */
 guard let scene = GameScene.level(1) else {
     print("Could not load GameScene with level 1")
     return
 }
-=======
-/* Load Level 1 */
-let resourcePath = NSBundle.mainBundle().pathForResource("Level1", ofType: "sks")
-let newLevel = SKReferenceNode (URL: NSURL (fileURLWithPath: resourcePath!))
-levelNode.addChild(newLevel)
->>>>>>> MakeSchool-Tutorials/master
 ```
 >
 
@@ -144,7 +132,6 @@ Now that you can shoot penguins, let's improve the experience by tracking the pe
 flight across the level. SpriteKit features a *SKCameraNode* that lets you view the 
 scene through this virtual camera. 
 
-<<<<<<< HEAD
 ## Add the camera
 
 A camera object gives us point of view through which we can view the scene. With a camera
@@ -154,13 +141,6 @@ of `SKNode`.
 > [action]
 > Add a camera to the scene. Open *Level_1.sks* add a camera node from the Object Library.
 > Set the position to `(0, 0)`, and the name to "cameraNode". 
-=======
-Oh no, you can't as the ice blocks don't have physics bodies.  SpriteKit lets you work on multiple nodes which makes this task even easier.
-
-> [action]
-> Open *Level1.sks*, hold *cmd* and *drag* a selection box across the scene.
-> To deselect the seals, you can then hold *shift* and click on the corner of each seal carefully.
->>>>>>> MakeSchool-Tutorials/master
 >
 
 ![Add camera to the scene](../Tutorial-Images/p7-06-add-camera.png)
@@ -218,13 +198,16 @@ understand how Swift works with numbers.
 ## Numbers - Int, Float, Double, and CGFloat
 
 Numbers in Swift can be different types. There are Doubles, Floats, Ints and more. 
-*SpriteKit* uses CGFloat for almost everything that is a number. 
+Double represents a 64-bit floating-point number. Float represents a 32-bit floating-point number.
+A CGFloat is like a Double but can be 32-bit when the operating system only supports 32-bit. This 
+allows CGFloat to be optimized for graphics processes. *SpriteKit* uses CGFloat for almost everything 
+that is a number. 
 
 While Swift has a clamp() funtion that works with Int, Float, and double. 
-There is no clamp function that takes a CGFloat! You will have to make your own.
+There is no clamp function that takes a CGFloat! You will have to make your own!
 
 > [action]
-> Add this new function outside of your `GameScene` class in *GameScene.swift*.
+> Add this new function *outside* of your `GameScene` class in *GameScene.swift*.
 > 
 ```
 func clamp<T: Comparable>(value: T, lower: T, upper: T) -> T {
@@ -239,15 +222,17 @@ and the minimum value between that and the upper value.
 
 In short this function can take in any type, including CGFloat! 
 
-A *comparable* is any 
-class that comforms to the *comparable* protocol. Comparables are any Type that can be 
-compared using relational operators: >, <, <=, and >=. Read more about 
-[comaprables here](https://developer.apple.com/reference/swift/comparable).
+> [info] A *comparable* is any 
+> class that comforms to the *comparable* protocol. Comparables are any Type that can be 
+> compared using relational operators: >, <, <=, and >=. Read more about 
+> [comaprables here](https://developer.apple.com/reference/swift/comparable).
+>
 
-Think of *T* in the function above as standing in for any Type that fits the description. 
-This is called a *generic*. Using a *generic* here allows this function to receive 
-different Types instead of a single fixed type. 
-[Read more about Swift generics here](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Generics.html). 
+> [info] Think of *T* in the function above as standing in for any Type that fits the description. 
+> This is called a *generic*. Using a *generic* here allows this function to receive 
+> different Types instead of a single fixed type. 
+> [Read more about Swift generics here](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Generics.html). 
+>
 
 ## Camera Target
 
@@ -255,9 +240,10 @@ You need to have a target for the camera to follow. This may exist or may not ex
 so you can make it an optional. In other words there may be a Penguin for the camera 
 to follow, or there may not be a Penguin for the camera to follow. 
 
-*Optionals* are variables that may have a value or they may have no value 
-in which case their value is *nil*. 
-[Read more about optionals here](https://medium.com/ios-os-x-development/swift-optionals-78dafaa53f3). 
+> [info] *Optionals* are variables that may have a value or they may have no value 
+> in which case their value is *nil*. 
+> [Read more about optionals here](https://medium.com/ios-os-x-development/swift-optionals-78dafaa53f3). 
+>
 
 > [action]
 > Add the following at the top of the `GameScene` class. 
