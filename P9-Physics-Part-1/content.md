@@ -135,7 +135,7 @@ static physics body.  This will then be used to provide the second body for the 
 > [action]
 > Open *Level_1.sks*
 > Drag a *Color Sprite* onto the stage and place it above the catapult arm.
-> Set *Name* to `cantileverNode` (check fancy catapult design terminology) :]
+> Set *Name* to "cantileverNode" (check fancy catapult design terminology) :]
 > Although you don't want this sprite to be visible to the player, for now just 
 > adjust the *Size* to `(25,25)` and leave it visible it's easier for you to work 
 > and debug with.
@@ -161,6 +161,20 @@ Next you need to add a code connection for this node.
 > [action]
 > Add a code connection for the `cantileverNode` yourself.
 
+> [action] 
+> At the top of the `GameScene` class: 
+> 
+> 
+```
+/* cantileverNode */
+var cantileverNode: SKSpriteNode!
+```
+>
+> Then give your var a value that is a reference to the node. Do this in `didMove(to view:)`:
+> 
+> `cantileverNode = childNode(withName: "cantileverNode") as! SKSpriteNode`
+>
+
 Time to finally join these bodies together using a *SKPhysicsJointSpring*.
 
 > [action]
@@ -168,7 +182,6 @@ Time to finally join these bodies together using a *SKPhysicsJointSpring*.
 >
 ```
 /* Spring joint catapult arm and cantilever node */
-<<<<<<< HEAD
 var anchorAPosition = catapultArm.position
 anchorAPosition.x += 0
 anchorAPosition.y += 50
@@ -176,19 +189,12 @@ let catapultSpringJoint = SKPhysicsJointSpring.joint(withBodyA: catapultArm.phys
 physicsWorld.add(catapultSpringJoint)
 catapultSpringJoint.frequency = 6
 catapultSpringJoint.damping = 0.5
-=======
-let catapultSpringJoint = SKPhysicsJointSpring.jointWithBodyA(catapultArm.physicsBody!, bodyB: cantileverNode.physicsBody!, anchorA: catapultArm.position + CGPoint(x:15, y:30), anchorB: cantileverNode.position)
-physicsWorld.addJoint(catapultSpringJoint)
->
-/* Make this joint a bit more springy */
-catapultSpringJoint.frequency = 1.5
->>>>>>> MakeSchool-Tutorials/master
 ```
 >
 
 Here you created a CGPoint to locate the position where the spring will attach to the 
 catapult arm. Then created a *spring joint*. After that you added the spring to the 
-physics world. Last you set some properties of the spring (frequency, damping). These
+physics world. Last you set some properties of the spring (`frequency`, `damping`). These
 determine the qualities of the spring. You may want to come back and edit these numbers to 
 adjust the catapult action when the game is finished. 
 
@@ -215,7 +221,7 @@ between a **touchNode** and the **catapultArm**
 **catapultArm** so the **catapultArm** snaps back to it's original position and fires 
 the penguin into the air
 
-It's often easier to understand when you see physics in action, there's a lot going on 
+It will be easier to understand when you see physics in action, there's a lot going on 
 here so make sure you pay extra attention. As I'm sure you already were :]
 
 ## Adding the touchNode
@@ -241,7 +247,7 @@ Let's double check the code connections so far in this section:
 var catapultArm: SKSpriteNode!
 var catapult: SKSpriteNode!
 var cantileverNode: SKSpriteNode!
-var touchNode: SKSpriteNode!
+var touchNode: SKSpriteNode! 
 ```
 >
 > Check the subsequent code connections in `didMove(to view:)` you should have these
@@ -257,14 +263,10 @@ touchNode = childNode(withName: "touchNode") as! SKSpriteNode
 
 ## Dynamic joints
 
-<<<<<<< HEAD
-Next up you will be dynamically creating a sprint joint whenever the player touches the 
-catapult arm to initiate pulling back the catapult.  It needs to be accessible to your 
-class as when the player lets go of the catapult arm you need to destroy the joint, 
-which in turn releases the catapult arm and sets everything in motion.
-=======
-Next up you will be dynamically creating a spring joint whenever the player touches the catapult arm to initiate pulling back the catapult. It needs to be accessible to your class so that when the player lets go of the catapult arm you can destroy the joint, which in turn releases the catapult arm and sets everything in motion.
->>>>>>> MakeSchool-Tutorials/master
+Next up you will be dynamically creating a spring joint whenever the player touches the catapult arm to 
+initiate pulling back the catapult. It needs to be accessible to your class so that when the player lets 
+go of the catapult arm you can destroy the joint, which in turn releases the catapult arm and sets 
+everything in motion.
 
 > [action]
 > Add this property to the *GameScene* class:
@@ -312,7 +314,7 @@ It's doesn't keep track as your finger move across the screen, for this you'll
 
 ## Lean back
 
-To pull the catapult arm you need the **touchNode** to track the player's touch.  You 
+To pull the catapult arm you need the **touchNode** to track the player's touch. You 
 can add this by implementing the *touchedMoved* method.
 
 > [action]
