@@ -3,13 +3,7 @@ title: Adding effects
 slug: adding-effect
 ---
 
-<<<<<<< HEAD:P12-Particle-Effects/content.md
-Now you are going to add an Angry Bird style particle effect whenever a seal gets 
-eliminated. SpriteKit has a great integrated particle effect designer which we are 
-going to use to define the style of our first particle effect.
-=======
 The game is looking good, it would be nice to start adding those little extra touches to enhance the game experience.  You are going to be adding both a particle effect and sound effect whenever a seal gets eliminated. SpriteKit has a great integrated particle effect designer which we are going to use to define the style of our first particle effect.
->>>>>>> MakeSchool-Tutorials/master:P12-Adding-Effects/content.md
 
 # Creating a new particle effect
 
@@ -18,10 +12,6 @@ The game is looking good, it would be nice to start adding those little extra to
 >
 <<<<<<< HEAD:P12-Particle-Effects/content.md
 > ![SpriteKit Particle File](../Tutorial-Images/p12-01-particle-emitter.png)
-=======
-> *Save as* `SealExplosion`
-> ![SpriteKit Particle File](../Tutorial-Images/xcode_spritekit_add_particle.png)
->>>>>>> MakeSchool-Tutorials/master:P12-Adding-Effects/content.md
 >
 > Choose Smoke from the menu. This is one of the default settings. 
 > 
