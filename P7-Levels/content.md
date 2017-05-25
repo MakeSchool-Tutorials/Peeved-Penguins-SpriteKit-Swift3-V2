@@ -303,23 +303,17 @@ You will implement this much like we did for the **Main Menu** using the *MSButt
 class.  
 
 > [info]
-<<<<<<< HEAD
 > If you finding yourself needing to create button graphics, I made the *restart.png* 
 > with aptly titled [Da Button Factory](http://dabuttonfactory.com/)
-> If you find something even better, please share it.
+> 
 
 Add the restart button to the *GameScene.sks*
-=======
-> If you finding yourself needing to create button graphics, I made the *restart.png* with aptly titled [Da Button Factory](http://dabuttonfactory.com/).
-> If you find something even better, please share it.
-
-Let's add the restart button to the *GameScene*.
->>>>>>> MakeSchool-Tutorials/master
 
 > [action]
-> Open *GameScene.sks* and drag the *restart.png* onto stage. I would recommend putting 
+> Open *Level_1.sks* and drag the *restart.png* onto stage. I would recommend putting 
 > it near the top left corner. Set *Name* to `buttonRestart` and set *Custom Class* 
 > to `MSButtonNode`.
+>
 
 Run your game... Fire some Penguins. Notice the restart button is stuck in the upper 
 left corner, and it disappears when the camera moves off the right. It would be nice if  
@@ -327,7 +321,7 @@ button moved with the camera so it was always available on screen. You can make 
 happen by setting the button's parent to the camera. 
 
 > [action]
-> Select the **restart button** and set *Parent* to `cameraNode`.
+> Select the *Restart button* and set *Parent* to `cameraNode`.
 
 ![UI Button](../Tutorial-Images/p7-07-reset-button-parent.png)
 
@@ -335,8 +329,9 @@ The next step is to run some code that will reload this scene when you tap the *
 button*. Can you do this yourself? Consult the *play button* in `MainMenu` and look at 
 `didMove(to view:)` in `GameScene`. Here are the steps: 
 
-- Declare a `var` for buttonRestart and set the reference in `didMove(to view:)`
-- define a block of code to run in the button's `selectedHandler`
+- Declare a `var` for buttonRestart 
+- Set the reference in `didMove(to view:)`
+- Define a block of code to run in the button's `selectedHandler`
 - Create a new scene with `GameScene.level(n)`
 - Present the scene
 
@@ -355,7 +350,7 @@ var buttonRestart: MSButtonNode!
 buttonRestart = childNode(withName: "//buttonRestart") as! MSButtonNode
 ```
 >
-> Still in `didMove(to view:)` add the selectedhandler to restart the *GameScene*:
+> Still in `didMove(to view:)` add the `selectedhandler` to restart the *GameScene*:
 >
 ```
 /* Reset the game when the reset button is tapped */
