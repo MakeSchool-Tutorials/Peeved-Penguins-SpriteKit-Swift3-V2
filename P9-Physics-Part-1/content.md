@@ -20,8 +20,8 @@ supports:
 - Fixed
 - Sliding
 
-You will use a pin joint to create a hinge point for the catapult arm. Then you will use 
-spring to make the catapult fling a Penguin.  
+In this tutorial you will use a pin joint to create a hinge point for the catapult arm. Then you will use 
+spring to make the catapult fling a Penguin.
 
 # Physics joints
 
@@ -32,20 +32,17 @@ you will join together. Two physics objects can be connected to each other using
 Try it out for yourself. 
 
 > [action]
-<<<<<<< HEAD
 > Open *Level_1.sks* select the *catapultArm* and look for *Physics Definition* and set 
 > the *Body Type* to *Bounding Rectangle*. 
-=======
-> Open *GameScene.sks* and enable physics on the **catapult** and **catapultArm** . Set *Body Type* to `Alpha mask`.
->>>>>>> MakeSchool-Tutorials/master
 >
 
 While the shape of the arm is not exactly a rectangle, the shape is close to a rectangle. 
-Using a rectangle will be more efficient give better performance. 
+Using a rectangle will be more efficient and give better performance. 
 
 > [action]
-> Next, select the catapult body and look for *Physics Definition* and set the *Body Type*
+> Next, select the catapult body, look for *Physics Definition* and set the *Body Type*
 > to *Alpha Mask*. 
+>
 
 In this case the physics shape follow the outline of the texture/image. This is less 
 effcient but will look better if a Penguin or Seal flies back and hits the catapult. 
@@ -74,44 +71,6 @@ Let's revise the physics bodies.
 
 ![Catapult body settings](../Tutorial-Images/p9-03-catapult-body.png)
 
-<<<<<<< HEAD
-You need a reference to both the *catapult* and the *catapultArm* to set up the joint.
-
-> [action]
-> Make sure you have a reference to both *catapult* and *catapultArm* at the top of 
-> *GameScene.swift* 
-=======
-You already have a code connection for the **catapultArm**, can you code connect the **catapult** as well?
-
-> [action]
-> Try and create a code connection for the `catapult`.
->
-> Remember to set the *Name*, a sensible value would be `catapult`
-
-Next you are going to manually setup the *Physics Body* for the **catapultArm**.
-
-> [action]
-> Add the following to `didMoveToView(...)` after the level loading code.
->
-```
-/* Create catapult arm physics body of type alpha */
-let catapultArmBody = SKPhysicsBody (texture: catapultArm!.texture!, size: catapultArm.size)
->
-/* Set mass, needs to be heavy enough to hit the penguin with solid force */
-catapultArmBody.mass = 0.5
->
-/* Apply gravity to catapultArm */
-catapultArmBody.affectedByGravity = true
->
-/* Improves physics collision handling of fast moving objects */
-catapultArmBody.usesPreciseCollisionDetection = true
->
-/* Assign the physics body to the catapult arm */
-catapultArm.physicsBody = catapultArmBody
-```
->
->>>>>>> MakeSchool-Tutorials/master
-
 You already have a code connection for the **catapultArm**, can you connect the 
 **catapult** as well. Remember to set the *Name*, a sensible value would be `catapult`.
 
@@ -128,21 +87,13 @@ You already have a code connection for the **catapultArm**, can you connect the
 > `catapult = childNode(withName: "catapult") as! SKSpriteNode`
 >
 
-<<<<<<< HEAD
 # Creating a Physics body and a joint
-=======
-#Your first joint
->>>>>>> MakeSchool-Tutorials/master
 
 Next you are going to manually setup the *Physics Body* for the **catapultArm**. Your 
 code is getting pretty long, it's a good idea to organize code into functions. 
 
 > [action]
-<<<<<<< HEAD
-> Add this method to the `GameScene` class.  
-=======
 > Add the following to the end of your `didMoveToView(...)` method:
->>>>>>> MakeSchool-Tutorials/master
 >
 ```
 func setupCatapult() {
@@ -158,7 +109,7 @@ func setupCatapult() {
 }
 ```
 >
-> Call the new function at the end of `didMove(to view:)`.
+> Call the new function at the *end* of `didMove(to view:)`.
 > 
 > `setupCatapult()`
 >
