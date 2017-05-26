@@ -107,15 +107,12 @@ Run the game... Let there be sound!
 
 # Summary
 
-Well done! You learnt to:
+Well done! You learned to:
 
 - Create your own custom particle effects and make them play when certain events in your game occur
 - Play SFX
->>>>>>> MakeSchool-Tutorials/master:P12-Adding-Effects/content.md
 
-# Summary
-
-Well done! Now you know how to create particle effects and make them play when certain 
+Now you know how to create particle effects and make them play when certain 
 events in your game occur.
 
 In the next chapter you will be adding animated penguins to the sidelines.
