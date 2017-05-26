@@ -81,24 +81,31 @@ the 60 particles it will emit, then we can remove it.
 
 # Adding SFX
 
-Adding sound effects is quite straight forward in SpriteKit, you can make use of the `playSoundFileNamed` *SKAction* to play sounds.
+Adding sound effects is quite straight forward in SpriteKit, you can make use of the `playSoundFileNamed` *SKAction* 
+to play sounds.
 
-Download the [SFX Pack](https://github.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift/raw/master/SFX.zip) we created for you. Once the download is complete, unpack the folder and add
+Download the [SFX Pack](https://github.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift/raw/master/SFX.zip) we
+created for you. Once the download is complete, unpack the folder and add
 to the project.
 
+Check that the sound you added will be included when you build your app. Select the sound and make use the 
+"Target Membership box" has a check. 
+
+![Target Membership](../Tutorial-Images/p12-11-add-target-sound.png)
+
 > [action]
-> Add the following to the `dieSeal` method:
+> Add the following to the `rmeoveSeal()` method:
 >
 ```
 /* Play SFX */
-let sealSFX = SKAction.playSoundFileNamed("sfx_seal", waitForCompletion: false)
-self.runAction(sealSFX)
+let sound = SKAction.playSoundFileNamed("sfx_seal", waitForCompletion: false)
+self.run(sound)
 ```
 >
 
 Run the game... Let there be sound!
 
-#Summary
+# Summary
 
 Well done! You learnt to:
 
