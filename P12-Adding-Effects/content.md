@@ -3,14 +3,20 @@ title: Adding effects
 slug: adding-effect
 ---
 
-The game is looking good, it would be nice to start adding those little extra touches to enhance the game experience.  You are going to be adding both a particle effect and sound effect whenever a seal gets eliminated. SpriteKit has a great integrated particle effect designer which we are going to use to define the style of our first particle effect.
+The game is looking good, it would be nice to start adding those little extra touches to enhance the game 
+experience. You are going to be adding both a particle effect and sound effect whenever a seal gets 
+eliminated. 
+
+Particles are used to create special effects like smoke, fire, rain, explosions, and more. In a nushell, 
+a particle system is a large number of small images all animated together as a system. SpriteKit has a 
+great integrated particle effect designer which we are going to use to define the style of our first 
+particle effect. 
 
 # Creating a new particle effect
 
 > [action]
 > Create a new particle effect `File > New > File > SpriteKit Particle File`
 >
-<<<<<<< HEAD:P12-Particle-Effects/content.md
 > ![SpriteKit Particle File](../Tutorial-Images/p12-01-particle-emitter.png)
 >
 > Choose Smoke from the menu. This is one of the default settings. 
@@ -37,7 +43,7 @@ or feel free to go crazy and create your own unique look.
 > ![Particle Attributes 2](../Tutorial-Images/xcode_spritekit_particle_2.png)
 >
 
-This should look something like that:
+This is what I came up with after playing with the particle settings for a little while. 
 
 ![SpriteKit Particle Grey Smoke](../Tutorial-Images/animated_grey_smoke.gif)
 
@@ -49,7 +55,7 @@ Let's add some code that adds the particle effect to the scene whenever a seal g
 eliminated.
 
 > [action]
-> Add the following code to the start of the `dieSeal` method:
+> Add the following code at the start of the `removeSeal` method:
 >
 ```
 /* Load our particle effect */
@@ -65,21 +71,15 @@ particles.run(seq)
 ```
 >
 
-Here you create an SKEmitter instance using the "Poof" particle you configured. Then 
-add it as a child of this scene, and position it at the same position as the Seal. 
+Here you create an SKEmitter instance using the particle system you configured in "Poof.sks". Then 
+add it as a child of this scene, and positioned it at the same position as the Seal. 
 Then you set up an action that will remove the `particles` after 5 seconds. 
 
 Note that I set the *Emitter Maximum* to 60 this limits the number of particles produced. 
 The wait time needs to be long enough so the emitter can run through the entire life of 
 the 60 particles it will emit, then we can remove it. 
 
-<<<<<<< HEAD:P12-Particle-Effects/content.md
-# Summary
-
-Well done! Now you know how to create particle effects and make them play when certain 
-events in your game occur.
-=======
-#Adding SFX
+# Adding SFX
 
 Adding sound effects is quite straight forward in SpriteKit, you can make use of the `playSoundFileNamed` *SKAction* to play sounds.
 
@@ -105,5 +105,10 @@ Well done! You learnt to:
 - Create your own custom particle effects and make them play when certain events in your game occur
 - Play SFX
 >>>>>>> MakeSchool-Tutorials/master:P12-Adding-Effects/content.md
+
+# Summary
+
+Well done! Now you know how to create particle effects and make them play when certain 
+events in your game occur.
 
 In the next chapter you will be adding animated penguins to the sidelines.
