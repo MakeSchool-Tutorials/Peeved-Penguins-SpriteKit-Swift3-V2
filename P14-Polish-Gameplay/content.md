@@ -7,15 +7,69 @@ Currently a player can only shoot once. The camera will follow the flying pengui
 won't scroll back to the catapult when the attempt is completed. You are going to that 
 in this chapter.
 
-The rule will be as follows:
+# Reset the camera
 
-If a penguin has stopped or is moving slowly we will remove the penguin and move the 
-camera back to the catapult and reset the catapult arm itself.
+When a Penguin flies off the screen or comes to rest on the screen we need to move the camera back over 
+to the catapult to be ready to launch the next Penguin. It's good to break our code into functions that 
+we can reuse so you will write a function to handle this. 
+
+> [action]
+> Add a new function to the `GameScene` class:
+>
+```
+func resetCamera() {
+    /* Reset camera */
+    let cameraReset = SKAction.move(to: CGPoint(x:0, y:camera!.position.y), duration: 1.5)
+    let cameraDelay = SKAction.wait(forDuration: 0.5)
+    let cameraSequence = SKAction.sequence([cameraDelay,cameraReset])
+    cameraNode.run(cameraSequence)
+    cameraTarget = nil
+}
+```
+>
+
+This function creates a new move action that moves the camera to (x: 0, y: 0). This should be 
+center of the left half of the screen. That is if the anchor point of the screen is in the center. 
+If not you can check the initial location of the camera and use those coordinates.
+
+Next we define a wait action. 
+
+Then there is sequence action. This combines the wait and the move. 
+
+Last we run the sequence on the camera. So the effect, when you call `resetCamera()` is wait
+half a second, then move back to the starting position. 
+
+At the very end we set the `cameraTarget` is set to `nil` since we aren't following that object 
+any more. 
+
+# Removing Penguins
+
+It is possible for a Penguin to fly off the screen. In this case we want to remove it from the 
+world. If it isn't visible we don't want the physics engine to keep track of it. 
+
+> [action]
+> Add a new function. 
+> 
+```
+func remove(penguin: Penguin) {
+    penguin.removeFromParent()
+    cameraTarget = nil
+}
+```
+>
+
+# Checking on the penguin
+
+If a penguin has stopped or is moving slowly we will remove `cameraTarget` and move the 
+camera back to the catapult and reset the catapult arm itself. This is trick 
 
 You will have to check if this condition becomes *true* on a regular basis, where do 
 you think this check should be made?
 
-# Implementing the check
+Also if a penguin falls below the edge of the screen it has fallen out of the world
+and should be removed, and the camera reset. 
+
+# Implementing the first check
 
 To check the speed of the penguin we need to look at it's motion in both the x and y. 
 The speed is a combination of both. The penguin has a velocity x and y. If we picture 
@@ -49,10 +103,7 @@ extension CGVector {
 > [action]
 <<<<<<< HEAD
 > Add the following code after the camera clamp in `func update(_ currentTime:)`
-=======
-> Add the following code after the camera clamp in `update(...)`
 >
->>>>>>> MakeSchool-Tutorials/master
 ```
 /* Check penguin has come to rest */
 if cameraTarget.physicsBody?.joints.count == 0 && cameraTarget.physicsBody?.velocity.length() < 0.18 {
