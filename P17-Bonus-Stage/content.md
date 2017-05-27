@@ -48,6 +48,11 @@ and build some new level content.
 > [challenge]
 > Implement a level mechanic and add at least 1 new level!
 
+You can copy level_1.sks and rename it Level_2.sks. To load a level call:
+
+- `GameScene.level(1)` Loads level 1
+- `GameScene.level(2)` Loads level 2
+
 # Catapult physics
 
 The catapult arm physics could be improved.
