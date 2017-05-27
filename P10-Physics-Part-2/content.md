@@ -38,6 +38,7 @@ penguinJoint = SKPhysicsJointPin.joint(withBodyA: catapultArm.physicsBody!,
                                        bodyB: penguin.physicsBody!,
                                        anchor: penguin.position)
 physicsWorld.add(penguinJoint!)
+cameraTarget = penguin
 ```
 >
 
@@ -77,7 +78,6 @@ let dy = sin(r) * force
 // Apply an impulse at the vector. 
 let v = CGVector(dx: dx, dy: dy)
 penguin.physicsBody?.applyImpulse(v)
-cameraTarget = penguin
 ```
 >
 
