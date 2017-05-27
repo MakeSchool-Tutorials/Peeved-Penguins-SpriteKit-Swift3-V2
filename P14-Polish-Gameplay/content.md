@@ -13,6 +13,8 @@ When a Penguin flies off the screen or comes to rest on the screen we need to mo
 to the catapult to be ready to launch the next Penguin. It's good to break our code into functions that 
 we can reuse so you will write a function to handle this. 
 
+The first job is to write a function to animate the camera back over to the catapult. 
+
 > [action]
 > Add a new function to the `GameScene` class:
 >
@@ -28,8 +30,8 @@ func resetCamera() {
 ```
 >
 
-This function creates a new move action that moves the camera to (x: 0, y: 0). This should be 
-center of the left half of the screen. That is if the anchor point of the screen is in the center. 
+This function creates a move action that moves the camera to (x: 0, y: 0). This should be 
+center of the left half of the screen. That is, if the anchor point of the screen is in the center. 
 If not you can check the initial location of the camera and use those coordinates.
 
 Next we define a wait action. 
@@ -45,15 +47,12 @@ any more.
 # Checking on the penguin
 
 If a penguin has stopped or is moving slowly we will remove `cameraTarget` and move the 
-camera back to the catapult and reset the catapult arm itself. This is trick 
-
-You will have to check if this condition becomes *true* on a regular basis, where do 
-you think this check should be made?
+camera back to the catapult and reset the catapult arm itself.
 
 Also if a penguin falls below the edge of the screen it has fallen out of the world
 and should be removed, and the camera reset. 
 
-# Implementing the first check
+# Checking the speed
 
 To check the speed of the penguin we need to look at it's motion in both the x and y. 
 The speed is a combination of both. The penguin has a velocity x and y. If we picture 
@@ -80,61 +79,52 @@ extension CGVector {
 }
 ```
 >
-> The extension adds a new method to CGVector. This method returns a CGFloat which is the 
-> length of the vector. 
+> The extension adds a new method to CGVector: `length()`. This method returns a CGFloat 
+> which is the length of the vector.
 > 
 
-The *length* function calculates the square length of the velocity (basically the 
-x and y component of the speed combined).
+We also need to check if the peguin has left the visible area of the game. In out case 
+it's safe to say that if the peguin fall below the ground we will never see it again. 
+This translates to roughly y = -200.
 
-There is an issue with this check, it works well once the penguin has been launched. 
-However, when the penguin is being pulled back on the catapult it will have a **speed** 
-or *length* less than the limit of `0.18`.
-
-You can use `cameraTarget.physicsBody?.joints.count` to check if the penguin has been 
-fired.
-
-The **cameraTarget** will point to the penguin and while the penguin it is attached to 
-the catapultArm there will be a joint attached to it, giving the  **joint.count** a 
-value of `1`.  This is a quick way to check this, another slightly more involved way 
-would be to use another property to track the *State* of the penguin. e.g. `Loading, 
-Launched`
-
-> [challenge]
-> I omitted another scenario here, what if the penguin somehow leaves the borders of 
-> the game scene? How would you check if the penguins position was out of the *GameScene*
->
-
-# Reset the camera
-
-You may have noticed another slight Ux issue here, what if the player tries to launch 
-another penguin before the camera has scrolled all the way back.?
-
-This can be corrected by stopping the *moveTo* action that's being applied to the camera, let's do this when a new penguin becomes attached to the catapult.
-
-> [action]
-> Add the following code to `touchesBegan(...)`, just before:
->
+> [action] 
+> Write a function to check on a flying penguin. 
+> 
 ```
-cameraTarget = penguin
+func checkPenguin() {
+    guard let cameraTarget = cameraTarget else {
+        return
+    }
+    
+    /* Check penguin has come to rest */
+    if cameraTarget.physicsBody!.joints.count == 0 && cameraTarget.physicsBody!.velocity.length() < 0.18 {
+        resetCamera()
+    }
+    
+    if cameraTarget.position.y < -200 {
+        cameraTarget.removeFromParent()
+        resetCamera()
+    }
+}
 ```
 >
-```
-/* Remove any camera actions */
-cameraNode.removeAllActions()
-```
->
+
+This function first checks if the `cameraTarget` is not `nil` with guard. Remember `cameraTarget` 
+is the penguin you just launched, and it is optional. There may not be a peguin in which case 
+there is nothing to check. 
+
+If there is a `cameraTarget` first we check the number of `joints` it's `physicsBody`. If there 
+is a joint the penguin is attached to the catapult arm, in which case it might be moving slowly
+as you pull the arm back and we don't want to launch it. We also check the speed by getting the 
+length of the `velocity` vector here, if the length is less than `0.18` we call `resetCamera()`.
+
+Next you check the `position.y` of the cameraTarget/penguin. If the y is less than (`<`) -200
+the penguin is below the ground and out of view so we remove it and reset the camera. 
 
 ## Final tweak
 
-<<<<<<< HEAD
-Let's get rid of the red box static nodes, an easy way to hide them using the editor is 
-to modify the *Z-Position* to `-2` e.g. behind the background.  The visibility of a 
-physics node has no effect on the physics simulation. Otherways to achieve this could 
-be setting the sprite to have an *alpha* of `0` or set *hidden* to be `true`.
-=======
-Let's get rid of the red box static nodes, an easy way to hide them using the editor is to modify the *Z-Position* to `-2` e.g. behind the background.  The visibility of a physics node has no effect on the physics simulation. Other ways to achieve this could be setting the sprite to have an *alpha* of `0` or set *hidden* to be `true`.
->>>>>>> MakeSchool-Tutorials/master
+Last hide the red helper sprites: 'cantileverNode' and 'touchNode' by moving them behind
+the background. You can do this by giving them a Z-Position of `-3`. 
 
 # Summary
 
