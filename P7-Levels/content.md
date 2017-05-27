@@ -257,7 +257,7 @@ var cameraTarget: SKSpriteNode?
 Now set the `cameraTarget` when you make a new Penguin. 
 
 > [Action]
-> Add the following at the end of the `touchesBegan(_ touches: with event:)` method: 
+> Add the following at the end of the `touchesEnded(_ touches: with event:)` method: 
 >
 ```
 cameraTarget = penguin
@@ -265,6 +265,26 @@ cameraTarget = penguin
 >
 
 The questionmark (?) after the type declares `cameraTarget` as an *optional*. 
+
+> [action]
+> Add a function that will make the camera follow the camera target. 
+> 
+```
+func moveCamera() {
+    guard let cameraTarget = cameraTarget else {
+        return
+    }
+    let targetX = cameraTarget.position.x
+    let x = clamp(value: targetX, lower: 0, upper: 392)
+    cameraNode.position.x = x
+}
+```
+>
+
+This function check if if `cameraTarge` is `nil`, it's an optional remember! Using `guard` if 
+`cameraTarget` is `nil` we end the function with `return`. Otherwise we get the x position of
+`cameraTarget` and set the x position of the `cameraNode` to the x position of the camera 
+target. 
 
 > [action]
 > Find the `func update(_ currentTime:)` method in the `GameScene` class. Add the 
