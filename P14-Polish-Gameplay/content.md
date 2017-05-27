@@ -42,22 +42,6 @@ half a second, then move back to the starting position.
 At the very end we set the `cameraTarget` is set to `nil` since we aren't following that object 
 any more. 
 
-# Removing Penguins
-
-It is possible for a Penguin to fly off the screen. In this case we want to remove it from the 
-world. If it isn't visible we don't want the physics engine to keep track of it. 
-
-> [action]
-> Add a new function. 
-> 
-```
-func remove(penguin: Penguin) {
-    penguin.removeFromParent()
-    cameraTarget = nil
-}
-```
->
-
 # Checking on the penguin
 
 If a penguin has stopped or is moving slowly we will remove `cameraTarget` and move the 
@@ -100,35 +84,7 @@ extension CGVector {
 > length of the vector. 
 > 
 
-> [action]
-<<<<<<< HEAD
-> Add the following code after the camera clamp in `func update(_ currentTime:)`
->
-```
-/* Check penguin has come to rest */
-if cameraTarget.physicsBody?.joints.count == 0 && cameraTarget.physicsBody?.velocity.length() < 0.18 {
->
-    cameraTarget.removeFromParent()
->
-    /* Reset catapult arm */
-    catapultArm.physicsBody?.velocity = CGVector(dx:0, dy:0)
-    catapultArm.physicsBody?.angularVelocity = 0
-    catapultArm.zRotation = 0
->
-    /* Reset camera */
-    let cameraReset = SKAction.moveTo(CGPoint(x:284, y:camera!.position.y), duration: 1.5)
-    let cameraDelay = SKAction.waitForDuration(0.5)
-    let cameraSequence = SKAction.sequence([cameraDelay,cameraReset])
->
-    camera?.runAction(cameraSequence)
-}
-```
-
-While this may look a little complicated at first, what actually is going on is only a 
-tiny bit of math. You want to check whether the **speed** of the penguin has come to 
-reset (or near rest).
-
-The *length* function that calculates the square length of the velocity (basically the 
+The *length* function calculates the square length of the velocity (basically the 
 x and y component of the speed combined).
 
 There is an issue with this check, it works well once the penguin has been launched. 
