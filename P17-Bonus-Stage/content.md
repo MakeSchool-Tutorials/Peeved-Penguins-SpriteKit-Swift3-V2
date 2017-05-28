@@ -53,6 +53,18 @@ You can copy level_1.sks and rename it Level_2.sks. To load a level call:
 - `GameScene.level(1)` Loads level 1
 - `GameScene.level(2)` Loads level 2
 
+Here are some ideas. 
+
+- Make a button for each level in the `MainMenu` scene. Set the action for these buttons to load different levels. 
+Make a level for each button. You'll need to be able to get back to the Main Menu from Game Scene. A button would 
+make this easy. 
+- Count the number of seals in a level when the level loads. You can count the seals that are destroyed 
+in the `removeSeal()` method. When the count gets to 0 you can load the next level. Using a class property to 
+keep track of the current level would make this easy. 
+- Combine the two ideas above. You can disable buttons for levels that are not available. `MSButtonNode` has a 
+`state` property, one of the enum values is `disabled`. You can check the current level and enable buttons to 
+make the appropriate levels enabled. 
+
 # Catapult physics
 
 The catapult arm physics could be improved.
