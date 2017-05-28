@@ -55,6 +55,9 @@ You can copy level_1.sks and rename it Level_2.sks. To load a level call:
 
 Here are some ideas. 
 
+- Make new levels by copying *Level_1.sks*. You can change the background and create new arrangements of seals 
+and ice blocks. You can also change the background. You **must** keep the main game objects: Catapult, Catapult 
+arm, Ground, Reset button. 
 - Make a button for each level in the `MainMenu` scene. Set the action for these buttons to load different levels. 
 Make a level for each button. You'll need to be able to get back to the Main Menu from Game Scene. A button would 
 make this easy. 
@@ -67,11 +70,20 @@ make the appropriate levels enabled.
 
 # Catapult physics
 
-The catapult arm physics could be improved.
+The catapult physics could be improved. The big problem with the physics of the game is the world is too 
+small in relation to the size of the catapult. To make this play better you can increase the size of the 
+world.
 
 > [challenge]
 > Can you create an improved physics shape in code to replace the catapult arm alpha 
 mask. Use this shape to create a better bucket to hold the penguin.
+
+- Make the world larger. You can make a larger landscape of your own. Try and copying and flipping the 
+provided background. Be sure to make the ground wide enough. 
+- Try making the catapult and arm smaller. You can scale these down in the scene. 
+- If the whole scene is larger you will end up tossing the penguin in a higher arc above the top of the screen. 
+In this case it is out of view. Remember that scaling the camera will zoom in or zoom out. In your `moveCamera()`
+you can look at the y position of the `cameraTarget` and scale the camera to keep the penguin visible. 
 
 # Summary
 
