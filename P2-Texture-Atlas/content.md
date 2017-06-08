@@ -27,7 +27,7 @@ otherwise it will default to portrait.
 
 # Download assets
 
-> [action] Now download the [Peeved Penguins art pack](../PeevedPenguinsAssets.zip) we 
+> [action] Now download the [Peeved Penguins art pack](/../PeevedPenguinsAssets.zip) we 
 > created for you. Once the download is complete, unpack the folder.
 
 # The Texture Atlas
