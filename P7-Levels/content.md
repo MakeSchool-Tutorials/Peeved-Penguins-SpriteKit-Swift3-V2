@@ -228,11 +228,12 @@ In short this function can take in any type, including CGFloat!
 > [comaprables here](https://developer.apple.com/reference/swift/comparable).
 >
 
+<!-- -->
+
 > [info] Think of *T* in the function above as standing in for any Type that fits the description. 
 > This is called a *generic*. Using a *generic* here allows this function to receive 
 > different Types instead of a single fixed type. 
 > [Read more about Swift generics here](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Generics.html). 
->
 
 ## Camera Target
 
@@ -240,10 +241,11 @@ You need to have a target for the camera to follow. This may exist or may not ex
 so you can make it an optional. In other words there may be a Penguin for the camera 
 to follow, or there may not be a Penguin for the camera to follow. 
 
-> [info] *Optionals* are variables that may have a value or they may have no value 
-> in which case their value is *nil*. 
-> [Read more about optionals here](https://medium.com/ios-os-x-development/swift-optionals-78dafaa53f3). 
+> [info] *Optionals* are variables that may have a value or they may have no value in which case their value is *nil*. 
 >
+> [Read more about optionals here](https://medium.com/ios-os-x-development/swift-optionals-78dafaa53f3). 
+
+<!-- -->
 
 > [action]
 > Add the following at the top of the `GameScene` class. 
@@ -252,7 +254,8 @@ to follow, or there may not be a Penguin for the camera to follow.
 /* Add an optional camera target */
 var cameraTarget: SKSpriteNode?
 ```
-> 
+
+<!-- -->
 
 Now set the `cameraTarget` when you make a new Penguin. 
 
@@ -262,7 +265,6 @@ Now set the `cameraTarget` when you make a new Penguin.
 ```
 cameraTarget = penguin
 ```
->
 
 The questionmark (?) after the type declares `cameraTarget` as an *optional*. 
 
@@ -279,7 +281,6 @@ func moveCamera() {
     cameraNode.position.x = x
 }
 ```
->
 
 This function check if if `cameraTarge` is `nil`, it's an optional remember! Using `guard` if 
 `cameraTarget` is `nil` we end the function with `return`. Otherwise we get the x position of
