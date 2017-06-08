@@ -16,10 +16,10 @@ The scene will be made of two parts:
 You are going to create a new *Scene* for the main menu.
 
 > [action]
-> Create a new SKS file (`File > New > File > SpriteKit Scene`) and name it `MainScene.sks`
+> Create a new SKS file (`File > New > File > SpriteKit Scene`) and name it `MainMenu.sks`
 > Set *Scene Size* to `(568,320)`
 >
-> ![MainScene attributes](../Tutorial-Images/p5-01-menu-scene.png)
+> ![MainMenu attributes](../Tutorial-Images/p5-01-menu-scene.png)
 >
 
 ## Adding the background
@@ -131,7 +131,7 @@ print: "No button action set".
 ## Load the Game Scene
 
 > [action]
-> Back in *MainMenu.swift* add a function to load the gameScene. Make to add the function below inside 
+> Back in *MainMenu.swift* add a function to load the gameScene. Add the function below inside 
 > the `MainMenu` class. 
 > 
 ```
