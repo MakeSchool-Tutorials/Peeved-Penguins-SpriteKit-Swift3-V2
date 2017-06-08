@@ -27,9 +27,3 @@ We'll be making a basic clone of Angry Birds with a catapult launcher and seal e
 The final game will look like this:
 
 ![Peeved Penguins Screenshot](../cover.png)
-
-# Feedback
-
-If you have feedback on this tutorial or find any mistakes, please open issues on the 
-[GitHub Repository](https://github.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift).
-
