@@ -3,7 +3,7 @@ title: Adding the main menu
 slug: main-menu
 ---
 
-Now you are going to setup a main menu screen. This start menu will then lead 
+Now you are going to setup a main menu screen. This start menu will then lead
 the player into the game play scene that you will develop in the next chapter.
 
 The scene will be made of two parts:
@@ -32,12 +32,12 @@ You are going to create a new *Scene* for the main menu.
 
 ## Add MSButtonNode
 
-Add the MSButtonNode class to your project. If you've improved the *MSButtonNode* class 
-in the *Hoppy Bunny Tutorial* and made it epic. Please feel free to reuse your copy in 
+Add the MSButtonNode class to your project. If you've improved the *MSButtonNode* class
+in the *Hoppy Bunny Tutorial* and made it epic. Please feel free to reuse your copy in
 this project.
 
 > [action]
-> [Download MSButtonNode.swift](../MSButtonNode.swift) and drag the file into your project, 
+> [Download MSButtonNode.swift](https://raw.githubusercontent.com/MakeSchool-Tutorials/Peeved-Penguins-SpriteKit-Swift3-V2/master/MSButtonNode.swift) and drag the file into your project,
 > ensuring *Copy items if needed* is checked.
 >
 
@@ -46,26 +46,27 @@ this project.
 The main menu needs a play button to trigger the transition into the *GameScene*.
 
 > [action]
-> SpriteKit does not provide any button objects, so you will need to use our assets as you 
+> SpriteKit does not provide any button objects, so you will need to use our assets as you
 > did in the *Hoppy Bunny Tutorial*.
 > Drag *button.png* into the scene, place it wherever looks good to you.
-> Then set the name of the button to `buttonPlay`. 
+> Then set the name of the button to `buttonPlay`.
 >
 > ![Setting a custom class](../Tutorial-Images/p5-03-button-name.png)
 >
-> Now create a code connection to link this button to your code. Set the 
+> Now create a code connection to link this button to your code. Set the
 > the *Custom Class* to `MSButtonNode`:
 >
 > ![Setting a custom class](../Tutorial-Images/p5-03-msbuttonnode.png)
 >
+Be sure to also set the `Scene` to have a custom class of `MainMenu`.
 
 ## Coding the main scene
 
-Let's add a new *MainMenu.Swift* file to facilitate functionality for 
+Let's add a new *MainMenu.Swift* file to facilitate functionality for
 *MainMenu.sks*.
 
 > [action]
-> Create a new empty Swift file (`File > New > File > Swift File`) and name it 
+> Create a new empty Swift file (`File > New > File > Swift File`) and name it
 > `MainMenu.swift`
 >
 > ![Add MainMenu.swift](../Tutorial-Images/p5-05-mainmenu-swift.png)
@@ -91,13 +92,13 @@ var buttonPlay: MSButtonNode!
 ```
 >
 
-This defines the class for this scene. It also defines a var to hold a reference to the button node. When the scene 
-loads we look for the node with the name "buttonPlay" and assign it to the var. 
+This defines the class for this scene. It also defines a var to hold a reference to the button node. When the scene
+loads we look for the node with the name "buttonPlay" and assign it to the var.
 
 # Launching the Main Scene
 
-By default a new game project will load the *GameScene*, you need to change this to 
-load *MainMenu* instead. The entry point for your game is `GameViewController.swift`. 
+By default a new game project will load the *GameScene*, you need to change this to
+load *MainMenu* instead. The entry point for your game is `GameViewController.swift`.
 
 > [action]
 > Open *GameViewController.swift* and modify the following line inside `viewDidLoad()`:
@@ -106,34 +107,35 @@ load *MainMenu* instead. The entry point for your game is `GameViewController.sw
 if let scene = SKScene(fileNamed: "GameScene") {
 ```
 > Replace with:
+>
 ```
 if let scene = MainMenu(fileNamed: "MainMenu") {
 ```
 
-The `viewDidLoad()` method in `GameViewController` is called when this view controller 
-appears on the screen, at which time we load the first scene: `MainMenu`. 
+The `viewDidLoad()` method in `GameViewController` is called when this view controller
+appears on the screen, at which time we load the first scene: `MainMenu`.
 
-Here you created an instance of *MainMenu.swift* which is an `SKScene`. When loading a Scene 
-you can also load it with a sks file using `SKScene(fileNamed:)`. In this case you used: 
+Here you created an instance of *MainMenu.swift* which is an `SKScene`. When loading a Scene
+you can also load it with a sks file using `SKScene(fileNamed:)`. In this case you used:
 `MainMenu(fileNamed: "MainMenu")` to create an instance of MainMenu (from MainMenu.swift)
-with the `MainMenu.sks` scene. 
+with the `MainMenu.sks` scene.
 
 Run your game...
 
 ![Screenshot main menu](../Tutorial-Images/p5-04-button-test.png)
 
-If the Simulator shows your game in portrait choose Hardware > Rotate Right 
+If the Simulator shows your game in portrait choose Hardware > Rotate Right
 (or Command+Right-arrow)
 
-Looks good, you can even touch the button. However, it doesn't do anything other than 
+Looks good, you can even touch the button. However, it doesn't do anything other than
 print: "No button action set".
 
 ## Load the Game Scene
 
 > [action]
-> Back in *MainMenu.swift* add a function to load the gameScene. Add the function below inside 
-> the `MainMenu` class. 
-> 
+> Back in *MainMenu.swift* add a function to load the gameScene. Add the function below inside
+> the `MainMenu` class.
+>
 ```
 func loadGame() {
     /* 1) Grab reference to our SpriteKit view */
@@ -162,11 +164,11 @@ func loadGame() {
 ```
 >
 > The code in this block gets a reference to the view **(1)**, we use guard here since `view`
-> is an optional. Next load the `GameScene` class with *GameScene.sks* **(2)**. This step also returns 
+> is an optional. Next load the `GameScene` class with *GameScene.sks* **(2)**. This step also returns
 > an optional so again we use `guard`. If all of that worked you set some options on the new scene
 > **(3)**. Last show the scene by calling `presentScene()` **(4)**.
 >
-> Next add block of code for the button to run when tapped. Add the following after `buttonPlay = ...` in 
+> Next add block of code for the button to run when tapped. Add the following after `buttonPlay = ...` in
 > `didMove(to view:)`:
 >
 ```
@@ -175,13 +177,13 @@ buttonPlay.selectedHandler = {
 }
 ```
 >
-> The button's `selectHandler` is a code block that runs when the button tapped. In this case you are calling 
-> the `loadGame()` function you wrote in the previous step. 
-> 
+> The button's `selectHandler` is a code block that runs when the button tapped. In this case you are calling
+> the `loadGame()` function you wrote in the previous step.
+>
 
 Run the project...
 
-You should now be able to touch the **Play** button and be presented with an empty 
+You should now be able to touch the **Play** button and be presented with an empty
 *GameScene*.
 
 # Summary
