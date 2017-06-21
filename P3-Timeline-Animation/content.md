@@ -61,18 +61,16 @@ of the image.
 Now you can animate the polar bear's arm. In SpriteKit there is a default **Timeline** for adding animation actions.  However, you are going to use a more powerful feature and create shared animations, which are stored in a *SpriteKit Action* file, this gives you the power to reuse the custom animations you create with any node.
 
 > [action]
-> Open the timeline then click on *+* to add a new timeline and name it `ArmAnimation`,
-> when prompted to create a new file name it `CharacterActions`.
 >
 > First open the timeline at the bottom of the editor.  
 >
 > ![Adding the character action file](../Tutorial-Images/p3-05-timeline.png)
 >
-> Next create a new action by clicking the **+**, choosing *Create new file*, last set the name to *CharacterActions*.
+> Next create a new action by clicking the **+**, choosing *Create new file*, last set the name to *ArmAnimation*.
 >
 > ![Create ArmAnimation action](../Tutorial-Images/p3-06-create-action.png)
 >
-> Last save the new actions.
+> Last save the new action as *CharacterActions*.
 >
 > ![CharacterAction](../Tutorial-Images/p3-07-character-actions.png)
 >
