@@ -121,10 +121,10 @@ guard let scene = GameScene.level(1) else {
 
 # Test some penguins
 
-Test your project in the simulator and tap the screen. Peguins should lay waste to the 
+Test your project in the simulator and tap the screen. penguins should lay waste to the 
 Seals and Ice Blocks. 
 
-![Peguin Destruction](../Tutorial-Images/p7-06-peguin-destruction.gif)
+![penguin Destruction](../Tutorial-Images/p7-06-penguin-destruction.gif)
 
 # Scrolling the scene
 

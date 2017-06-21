@@ -11,7 +11,7 @@ Before we continue let's clarify some terminology.
 **Categories** 
 
 Categories refer to different groups of objects. In your game Penguins, Ice Blocks, 
-and Seals would be different categories. We need to know when Peguins and Ice Blocks 
+and Seals would be different categories. We need to know when penguins and Ice Blocks 
 hit Seals. 
 
 **Contact**
@@ -67,7 +67,7 @@ Each *physicsBody* has a property called *categoryBitMask*. This *categoryBitMas
 to identify different categories of physics objects. Categories might be things like: 
 
 - 00000000 = 0 None - use this for objects that do not interact with other objects
-- 00000001 = 1 Penguin - use this for peguins we fling
+- 00000001 = 1 Penguin - use this for penguins we fling
 - 00000010 = 2 Seal - Use this for Seals 
 - 00000100 = 4 Ice Block - Use this Ice blocks
 - 00001000 = 8 Ground - This identifies the ground
@@ -96,7 +96,7 @@ Penguins collide with Seals, Ice Blocks, and the Ground.
 - 000000010 = 2 = Seal category
 - 000000100 = 4 = Ice Block category
 - 000001000 = 8 = Ground category
-- 000001110 = 14 = Peguin collision bitmask
+- 000001110 = 14 = penguin collision bitmask
 
 Penguin collision = Seal + Ice Block + Ground = 2 + 4 + 8 = 14
 

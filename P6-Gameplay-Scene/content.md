@@ -106,7 +106,7 @@ the previous module when you tap the screen. You also position that new penguin 
 
 Run your game...
 
-![Animated penguin launcher](../Tutorial-Images/p6-06-peguin-test.gif)
+![Animated penguin launcher](../Tutorial-Images/p6-06-penguin-test.gif)
 
 Great, the penguin spawns at the catapult, but sadly it falls out of the game world.
 

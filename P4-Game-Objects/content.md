@@ -51,7 +51,7 @@ class Penguin: SKSpriteNode {
 ```
 >
 
-Here you made a new Swift file, and defined a class named: Penguin. The Peguin class
+Here you made a new Swift file, and defined a class named: Penguin. The penguin class
 sub classes the SKSpriteNode class. SpriteNodes are game objects. The Penguin sprite
 has a texture, color, and size. These determine how the sprite appears on the screen. 
 
