@@ -93,7 +93,7 @@ Next you are going to manually setup the *Physics Body* for the **catapultArm**.
 code is getting pretty long, it's a good idea to organize code into functions.
 
 > [action]
-> Add the following to the end of your `didMoveToView(...)` method:
+> Add the following after your `didMoveToView(...)` method:
 >
 ```
 func setupCatapult() {
@@ -113,6 +113,8 @@ func setupCatapult() {
 >
 > `setupCatapult()`
 >
+
+<!--  -->
 
 > [info]
 > *Remember* Apple documentation is your friend, if you are unsure of anything,
@@ -161,6 +163,8 @@ Next you need to add a code connection for this node.
 > [action]
 > Add a code connection for the `cantileverNode` yourself.
 
+<!--  -->
+
 > [action]
 > At the top of the `GameScene` class:
 >
@@ -172,8 +176,9 @@ var cantileverNode: SKSpriteNode!
 >
 > Then give your var a value that is a reference to the node. Do this in `didMove(to view:)`:
 >
-> `cantileverNode = childNode(withName: "cantileverNode") as! SKSpriteNode`
->
+```
+cantileverNode = childNode(withName: "cantileverNode") as! SKSpriteNode
+```
 
 Time to finally join these bodies together using a *SKPhysicsJointSpring*.
 
@@ -252,6 +257,7 @@ var touchNode: SKSpriteNode!
 >
 > Check the subsequent code connections in `didMove(to view:)` you should have these
 > connections:
+>
 ```
 /* Set reference to catapultArm node */
 catapultArm = childNode(withName: "catapultArm") as! SKSpriteNode
@@ -335,7 +341,7 @@ object.
 
 There is one last step required to 'spring it to life'. Once the player releases
 their touch, you need to sever the **touchJoint**. This will release the joint
-holding the catapult arm and **touchNode**, allowing the forced stored in the
+holding the catapult arm and **touchNode**, allowing the force stored in the
 **cantileverNode** spring joint to exert its force.
 
 ## Let it go
