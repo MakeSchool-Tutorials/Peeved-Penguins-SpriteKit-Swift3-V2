@@ -7,7 +7,7 @@ The game is looking good, it would be nice to start adding those little extra to
 experience. You are going to be adding both a particle effect and sound effect whenever a seal gets
 eliminated.
 
-Particles are used to create special effects like smoke, fire, rain, explosions, and more. In a nushell,
+Particles are used to create special effects like smoke, fire, rain, explosions, and more. In a nutshell,
 a particle system is a large number of small images all animated together as a system. SpriteKit has a
 great integrated particle effect designer which we are going to use to define the style of our first
 particle effect.

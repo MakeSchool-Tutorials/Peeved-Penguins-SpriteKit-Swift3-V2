@@ -166,7 +166,7 @@ penguin.physicsBody?.applyImpulse(launchImpulse)
 ```
 >
 
-First your setup the force vector with a direction `(200,0)` e.g X = 200 (Right) and y = 0 (not up or down).
+Here we set up the force vector with a direction `(200,0)` e.g X = 200 (Right) and y = 0 (not up or down).
 
 > [info]
 > If you need a little recap on vectors, this diagram illustrates the direction of the

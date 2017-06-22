@@ -336,7 +336,7 @@ override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
 >
 
 Great you can now pull back the catapult, remember to touch and drag from the **catapult
-arm!** Touching the "touch node" will have no effect. The touch node is a just a helper
+arm!** Touching the "touch node" will have no effect. The touch node is just a helper
 object.
 
 There is one last step required to 'spring it to life'. Once the player releases

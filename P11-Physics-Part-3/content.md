@@ -107,8 +107,7 @@ Penguin collision = Penguin + Seal + Ice Block + Ground = 1 + 2 + 4 + 8 = 15
 
 ## Bitwise operations
 
-Bitwise operations are math operations that applied at the binary, or bit, level. There
-Two operations that we need to work with.
+Bitwise operations are math operations that applied at the binary, or bit, level. There are two operations that we need to work with.
 
 ### Bitwise AND &
 
@@ -134,7 +133,7 @@ is 1. Here is an example:
 ### Bitwise OR |
 
 A bitwise OR operation compares the bit in each column. If the bit in either column is 1
-then the answer is 1. Here is an examples:
+then the answer is 1. Here is an example:
 
 ```
   00000000

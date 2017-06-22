@@ -95,7 +95,7 @@ Now load the Level 1.
 
 > [action]
 > You need to modify code you used to load `GameScene`. Find the block of code
-> below in *MainMenu.swift* inside `loadScene()` method.
+> below in *MainMenu.swift* inside `loadGame()` method.
 >
 ```
 /* 2) Load Game scene */
@@ -282,7 +282,7 @@ func moveCamera() {
 }
 ```
 
-This function check if if `cameraTarget` is `nil`, Remember to check for nil on optionals that may not contain a value or you end up crashing your game! Using `guard` if
+This function checks if `cameraTarget` is `nil`, Remember to check for nil on optionals that may not contain a value or you end up crashing your game! Using `guard` if
 `cameraTarget` is `nil` we end the function with `return`. Otherwise we get the x position of
 `cameraTarget` and set the x position of the `cameraNode` to the x position of the camera
 target.
