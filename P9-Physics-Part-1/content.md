@@ -55,7 +55,7 @@ Run your game...
 
 The catapult falls apart because you're not using joints to keep it connected!
 The bodies are also Dynamic, the default setting. Dynamic bodies can not over lap and
-are effected by gravity.
+are affected by gravity.
 
 # Getting the physics bodies ready
 
