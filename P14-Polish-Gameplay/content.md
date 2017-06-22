@@ -95,12 +95,12 @@ func checkPenguin() {
     guard let cameraTarget = cameraTarget else {
         return
     }
-
+>
     /* Check penguin has come to rest */
     if cameraTarget.physicsBody!.joints.count == 0 && cameraTarget.physicsBody!.velocity.length() < 0.18 {
         resetCamera()
     }
-
+>
     if cameraTarget.position.y < -200 {
         cameraTarget.removeFromParent()
         resetCamera()
