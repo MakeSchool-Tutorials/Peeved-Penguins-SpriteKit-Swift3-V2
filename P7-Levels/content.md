@@ -29,7 +29,7 @@ as `Level_#.sks` where # will be the level number. For example:
 - `Level_3.sks`
 - etc.
 
-# Level_1
+# Level 1
 
 > [action]
 > Rename *GameScene.sks* to `Level_1.sks`
