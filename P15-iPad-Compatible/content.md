@@ -3,7 +3,7 @@ title: Make it iPad compatible
 slug: ipad-compatible
 ---
 
-SpriteKit allows you to adapt your game for the iPad without having to supply new assets 
+SpriteKit allows you to adapt your game for the iPad without having to supply new assets
 and only requires making a few small changes.
 
 # iPad Tweaks
@@ -28,8 +28,8 @@ Run your game again, it should be landscape only now.
 
 ## Aspect
 
-Currently you are using a scene *scaleMode* or `.AspectFill` which looks great on the 
-iPhone.  However, for the iPad you can't see all of the game content.  Let's try another 
+Currently you are using a scene *scaleMode* or `.AspectFill` which looks great on the
+iPhone.  However, for the iPad you can't see all of the game content.  Let's try another
 scale mode.
 
 > [action]
@@ -42,7 +42,7 @@ scale mode.
 
 Run your game...
 
-Looking better, the only minor point is the letterbox effect.  However, this is more 
+Looking better, the only minor point is the letterbox effect.  However, this is more
 than acceptable for the minimal amount of work required to achieve this compatibility.  
 Some games simply add a decoration border to fill this space.
 
@@ -56,13 +56,13 @@ This is actually an easy fix, it helps if all nodes are centered correctly.
 
 
 > [action]
-> Open *GameScene.sks*, select the scene and set *Anchor point* to `(0.5,0.5)`
+> Open `Level_1.sks`, select the scene and set *Anchor point* to `(0.5,0.5)`
 
 Run your game... YES! :]
 
 # Summary
 
-Congrats on finishing *Peeved Penguins*, give yourself or the person next to you a high 
+Congrats on finishing *Peeved Penguins*, give yourself or the person next to you a high
 five.
 
 The next chapter will be a recap of everything you have covered so far, well done.
